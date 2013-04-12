@@ -1,4 +1,4 @@
-package tests;
+package sandbox;
 
 import tobii.APIException;
 import tobii.Configuration;
@@ -15,7 +15,7 @@ public class SimpleClient {
 			
 			@Override
 			public void gazeEvent(GazeEvent event) {
-				System.out.println(event.clientTimeElapsed);
+				System.out.println(event.nanoTimeReceived);
 			}
 			
 			@Override

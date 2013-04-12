@@ -4,7 +4,6 @@ package tobii;
  * An eye tracking exception from the low level API.
  * 
  * @author Ralf Biedert <rb@xr.io>
- *
  */
 public class APIException extends Exception {
 	/** */

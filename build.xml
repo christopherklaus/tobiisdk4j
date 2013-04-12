@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<!-- General project description -->
+<project name="tobiigazesdk" default="all">
+    
+    <!-- Define different global variables -->
+    <property name="prefix" value="tobiigazesdk"/>
+    <property name="version" value="1.0"/>
+    
+    <tstamp/>
+
+	<!-- Define different roots -->
+    <property name="build.root" value="ant.build/"/>
+    <property name="distribution.root" value="dist/"/>
+    
+    
+    <!-- Clear everything up -->
+    <target name="clean" description="Remove all previous build files">
+        <delete dir="${build.root}"/>
+        <delete dir="${distribution.root}"/>
+        <delete dir="documentation/api"/>
+        <mkdir dir="documentation/api"/>
+    </target>
+    
+    
+    <!-- Build jCores -->
+    <target name="compile" description="Compile jCores" depends="clean">
+        <!-- Create folders -->    	
+        <mkdir dir="${build.root}/bin/"/>
+
+        <!-- Make JRE core -->
+        <javac srcdir="src" destdir="${build.root}/bin" source="1.6" target="1.6">
+            <classpath>
+                <fileset dir="lib/">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+	
+    <!-- Pack jCores -->
+    <target name="pack" description="Pack jCores">
+        <!-- Create output folder -->
+        <mkdir dir="${distribution.root}/"/>
+           
+    	<copy file="lib/bridj-0.6.2-windows-only.jar" tofile="${distribution.root}/bridj-0.6.2-windows-only.jar"/>
+    	<copy file="lib/TobiiGazeConfig64.dll" tofile="${distribution.root}/TobiiGazeConfig64.dll"/>
+        <copy file="lib/TobiiGazeCore64.dll" tofile="${distribution.root}/TobiiGazeCore64.dll"/>
+    	
+    	<!-- Rejar everything -->
+        <jar destfile="${distribution.root}/${prefix}-${version}.jar" basedir="${build.root}/bin"/>
+    </target>
+
+	
+    
+    <!-- Run tests after we packed our result -->
+    <target name="test" description="Run all testcases">
+        <mkdir dir="${build.root}/tests/"/>
+        
+        <!-- Compile all testcases -->
+        <javac srcdir="src" destdir="${build.root}/tests/" source="1.6" target="1.6">
+            <classpath>
+                <fileset dir="lib">
+                    <filename name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>    	
+    	        
+        <!-- Run all testcases -->
+        <junit printsummary="true" haltonfailure="true" fork="true">
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="${build.root}/tests/" includes="junit/*Test.class"/>
+            </batchtest>
+            <classpath>
+                <fileset dir="${distribution.root}/">
+                    <include name="*.jar"/>
+                </fileset>
+                <fileset dir="lib/">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+            <classpath location="${build.root}/tests/"/>
+        </junit>
+    	
+    </target>
+    
+	
+    <!-- Documentation -->
+    <target name="documentation">
+        <javadoc access="public" author="true" destdir="documentation/api" doctitle="Tobii Gaze SDK" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="tobii,tobii.util" source="1.6" sourcepath="src" splitindex="true" use="true" version="true">
+        	<link href="http://download.oracle.com/javase/6/docs/api/"/>
+        </javadoc>
+    </target>
+    
+	
+    <!-- Prepare distributables -->
+    <target name="preparepublish" description="Generate distributables" >
+        <delete dir="${build.root}"/>
+        
+        <!-- Zip binary -->
+        <zip destfile="${distribution.root}/${prefix}-${version}.bin.zip">
+            <fileset dir=".">
+                <include name="documentation/**/*"/>
+                <include name="dist/*.jar"/>
+                <include name="dist/*.dll"/>
+            </fileset>
+        </zip>        
+    </target>
+
+    <!-- Pack plugins -->
+    <target name="all" depends="compile, pack, documentation, preparepublish"/>
+</project>

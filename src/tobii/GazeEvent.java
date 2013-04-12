@@ -10,17 +10,18 @@ import java.io.Serializable;
 public class GazeEvent implements Serializable {
 	/** */
 	private static final long serialVersionUID = -8792167654827535512L;
+
 	
-	public GazeEvent(long clientTime, long eventTime, int status, GazeEventEyeInfo left, GazeEventEyeInfo right) {
-		this.clientTimeElapsed = clientTime;
+	public GazeEvent(long nanoTimeReceived, long eventTime, int status, GazeEventEyeInfo left, GazeEventEyeInfo right) {
+		this.nanoTimeReceived = nanoTimeReceived;
 		this.eventTime = eventTime;		 
 		this.status = status;
 		this.left = left;
 		this.right = right;		
 	}
 	
-	/** The timestamp on the Java side (System.nano() high precision time). */
-	public final long clientTimeElapsed;
+	/** The timestamp on the Java side (System.nano() high precision time) when we received it. */
+	public final long nanoTimeReceived;
 	
 	/** The internal timestamp on the Tobii / native Win32 side when this was recorded */
 	public final long eventTime;

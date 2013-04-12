@@ -31,7 +31,7 @@ public class GazeEventEyeInfo implements Serializable {
 	/** gives the position of the eyeball within the track box volume */
 	public final V3 eyePosInBoxNorm;
 
-	/** point on the calibration plane where the user’s gaze is */
+	/** point on the calibration plane where the user's gaze is */
 	public final V3 gazeFromTrackerMM;
 
 	/** expressed as a two-dimensional point on the calibration plane instead of as a point in 3D space. */

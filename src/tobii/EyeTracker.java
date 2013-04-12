@@ -46,7 +46,7 @@ public final class EyeTracker implements Tracker {
 			final tobiigaze_gaze_data data = gaze_data.apply(0);
 						
 			final GazeEvent e = new GazeEvent(
-					configuration.elapsed(), 
+					System.nanoTime(), 
 					data.timestamp(),
 					(int) data.tracking_status().value(),
 					GazeEventEyeInfo.create(data.left()),
@@ -83,7 +83,7 @@ public final class EyeTracker implements Tracker {
 	 * 
 	 */
 	public EyeTracker(Configuration configuration, String url) throws APIException {
-		this.listener = new LinkedList<>();
+		this.listener = new LinkedList<GazeListener>();
 		this.configuration = configuration;			
 		this.url = url == null || "".equals(url) ? configuration.defaultTrackerURL() : url; 
 	}

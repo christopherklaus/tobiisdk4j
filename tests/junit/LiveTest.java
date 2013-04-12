@@ -1,4 +1,4 @@
-package tests;
+package junit;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import tobii.APIException;
 import tobii.GazeEvent;
 import tobii.GazeListener;
 
-public class LiveTests {
+public class LiveTest {
 
 	@Test
 	public void testConnect() throws APIException {

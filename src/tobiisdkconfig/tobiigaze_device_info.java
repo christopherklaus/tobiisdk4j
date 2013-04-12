@@ -1,4 +1,4 @@
-package tobiisdk;
+package tobiisdkconfig;
 import org.bridj.Pointer;
 import org.bridj.StructObject;
 import org.bridj.ann.Array;

@@ -1,4 +1,4 @@
-package tobiix;
+package tests;
 import java.io.File;
 
 import tobii.lowlevel.API;
@@ -8,7 +8,7 @@ import tobii.lowlevel.tobiigaze_error_code;
 import tobii.lowlevel.tobiigaze_error_codep;
 
 
-public class Test {
+public class SWIGTest {
 
 	/**
 	 * @param args

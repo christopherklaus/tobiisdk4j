@@ -18,7 +18,7 @@ import org.bridj.ann.Runtime;
  * a tool written by <a href="http://ochafik.com/">Olivier Chafik</a> that <a href="http://code.google.com/p/jnaerator/wiki/CreditsAndLicense">uses a few opensource projects.</a>.<br>
  * For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> or <a href="http://bridj.googlecode.com/">BridJ</a> .
  */
-@Library("TobiiSDK") 
+@Library("TobiiGazeCore64") 
 @Runtime(CRuntime.class) 
 public class TobiiSDKLibrary {
 	static {
@@ -197,31 +197,6 @@ public class TobiiSDKLibrary {
 		}
 	};
 	/**
-	 * enum values<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:522</i>
-	 */
-	public enum tobiigaze_tracked_eyes implements IntValuedEnum<tobiigaze_tracked_eyes > {
-		TOBIIGAZE_BOTH_EYES(0),
-		TOBIIGAZE_LEFT_EYE_ONLY(1),
-		TOBIIGAZE_RIGHT_EYE_ONLY(2);
-		tobiigaze_tracked_eyes(long value) {
-			this.value = value;
-		}
-		public final long value;
-		public long value() {
-			return this.value;
-		}
-		public Iterator<tobiigaze_tracked_eyes > iterator() {
-			return Collections.singleton(this).iterator();
-		}
-		public static IntValuedEnum<tobiigaze_tracked_eyes > fromValue(int value) {
-			return FlagSet.fromValue(value, values());
-		}
-	};
-	/// Various tobiigaze constants.
-	public static final int TOBIIGAZE_CONFIG_MAX_EYE_TRACKER_URL_LENGTH = 256;
-	public static final int TOBIIGAZE_CONFIG_MAX_USER_PROFILE_LENGTH = 256;
-	/**
 	 * This type is used for the callback function that is registered with tobiigaze_add_gaze_data_listener. The callback function will be called when gaze <br>
 	 * data is received from the eye tracker.<br>
 	 * @param gaze_data     The received Gaze Data.<br>
@@ -364,11 +339,6 @@ public class TobiiSDKLibrary {
 	 */
 	public static abstract class tobiigaze_key_provider_callback extends Callback<tobiigaze_key_provider_callback > {
 		abstract public void apply(int realm_id, Pointer<tobiigaze_key > key);
-	};
-	/// <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:523</i>
-	/// <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:523</i>
-	public static abstract class tobiigaze_config_async_callback extends Callback<tobiigaze_config_async_callback > {
-		abstract public void apply(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
 	 * Original signature : <code>void tobiigaze_list_usb_eye_trackers(usb_device_info*, uint32_t, uint32_t*, tobiigaze_error_code*)</code><br>
@@ -625,143 +595,6 @@ public class TobiiSDKLibrary {
 	}
 	@Ptr 
 	protected native static long tobiigaze_convert_error_code_to_string(int error_code);
-	/**
-	 * Load the required components and inits the interface. This must be the very first<br>
-	 * call to Tobiigaze Config.<br>
-	 * @param error_code Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_init(tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:531</i>
-	 */
-	public static void tobiigaze_config_init(Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_init(Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_init(@Ptr long error_code);
-	/**
-	 * Frees loaded components.<br>
-	 * Original signature : <code>void tobiigaze_config_free()</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:536</i>
-	 */
-	native public static void tobiigaze_config_free();
-	/**
-	 * Validates the system eye tracking configuration.<br>
-	 * @param error_code Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_validate(tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:542</i>
-	 */
-	public static void tobiigaze_config_validate(Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_validate(Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_validate(@Ptr long error_code);
-	/**
-	 * Gets the url for the default system eye tracker.<br>
-	 * @param url        A buffer to receive the url.<br>
-	 * @param url_size   Size of the buffer in bytes.<br>
-	 * @param error_code Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_get_default_eye_tracker_url(char*, uint32_t, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:550</i>
-	 */
-	public static void tobiigaze_config_get_default_eye_tracker_url(Pointer<Byte > url, int url_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_get_default_eye_tracker_url(Pointer.getPeer(url), url_size, Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_get_default_eye_tracker_url(@Ptr long url, int url_size, @Ptr long error_code);
-	/**
-	 * Gets the name of the current user profile.<br>
-	 * @param user_profile      A buffer to receive the name of the user profile.<br>
-	 * @param user_profile_size Size of the buffer in bytes.<br>
-	 * @param error_code        Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_get_current_user_profile(char*, uint32_t, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:558</i>
-	 */
-	public static void tobiigaze_config_get_current_user_profile(Pointer<Byte > user_profile, int user_profile_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_get_current_user_profile(Pointer.getPeer(user_profile), user_profile_size, Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_get_current_user_profile(@Ptr long user_profile, int user_profile_size, @Ptr long error_code);
-	/**
-	 * Prepares the eye tracker according to the system eye tracking configuration asynchronously.<br>
-	 * @param url          An url identifying the system eye tracker. Needed as eyetracker pointer itself contains no information about url<br>
-	 * @param eye_tracker  An eye tracker instance.<br>
-	 * @param user_profile A user profile.<br>
-	 * @param callback     A callback function that will be called on command completion.<br>
-	 * @param user_data    Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_prepare_eye_tracker_async(const char*, const char*, tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:568</i>
-	 */
-	public static void tobiigaze_config_prepare_eye_tracker_async(Pointer<Byte > url, Pointer<Byte > user_profile, Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
-		tobiigaze_config_prepare_eye_tracker_async(Pointer.getPeer(url), Pointer.getPeer(user_profile), Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
-	}
-	protected native static void tobiigaze_config_prepare_eye_tracker_async(@Ptr long url, @Ptr long user_profile, @Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
-	/**
-	 * Prepares the eye tracker according to the system eye tracking configuration synchronously.<br>
-	 * @param url          An url identifying the system eye tracker. Needed as eyetracker pointer itself contains no information about url<br>
-	 * @param eye_tracker  An eye tracker instance	           <br>
-	 * @param user_profile A user profile.<br>
-	 * @param error_code   Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_prepare_eye_tracker(const char*, const char*, tobiigaze_eye_tracker*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:577</i>
-	 */
-	public static void tobiigaze_config_prepare_eye_tracker(Pointer<Byte > url, Pointer<Byte > user_profile, Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_prepare_eye_tracker(Pointer.getPeer(url), Pointer.getPeer(user_profile), Pointer.getPeer(eye_tracker), Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_prepare_eye_tracker(@Ptr long url, @Ptr long user_profile, @Ptr long eye_tracker, @Ptr long error_code);
-	/**
-	 * Launches the control panel for eye tracking in a separate process.<br>
-	 * @param error_code Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_launch_control_panel(tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:583</i>
-	 */
-	public static void tobiigaze_config_launch_control_panel(Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_launch_control_panel(Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_launch_control_panel(@Ptr long error_code);
-	/**
-	 * Gets the bounds of the screen on which an eye tracker is mounted, in pixels, measured from the top left corner of the primary screen.<br>
-	 * (In a multi-monitor setup, all the monitors are combined into a single virtual screen.)<br>
-	 * @param url           An url identifying the system eye tracker.<br>
-	 * @param bounds        Will receive the screen bounds in pixels.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_get_screen_bounds_pixels(const char*, tobiigaze_rect*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:592</i>
-	 */
-	public static void tobiigaze_config_get_screen_bounds_pixels(Pointer<Byte > url, Pointer<tobiigaze_rect > bounds, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_get_screen_bounds_pixels(Pointer.getPeer(url), Pointer.getPeer(bounds), Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_get_screen_bounds_pixels(@Ptr long url, @Ptr long bounds, @Ptr long error_code);
-	/**
-	 * Gets the eye(s) to be tracked according to the current user profile.<br>
-	 * @param user_profile A user profile.<br>
-	 * @param tracked_eyes Will receive the eye(s) to be tracked.<br>
-	 * @param error_code   Will contain an error code or 0 if no error occurred.<br>
-	 * Original signature : <code>void tobiigaze_config_get_tracked_eyes(const char*, tobiigaze_tracked_eyes*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:600</i>
-	 */
-	public static void tobiigaze_config_get_tracked_eyes(Pointer<Byte > user_profile, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_tracked_eyes > > tracked_eyes, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_get_tracked_eyes(Pointer.getPeer(user_profile), Pointer.getPeer(tracked_eyes), Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_get_tracked_eyes(@Ptr long user_profile, @Ptr long tracked_eyes, @Ptr long error_code);
-	/**
-	 * Sets the logging output filename and verbosity.<br>
-	 * @param filename            The filename of the logfile.<br>
-	 * @param tobiigaze_log_level The verbosity of the logging.<br>
-	 * @param error_code          Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_config_set_logging(const char*, tobiigaze_log_level, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:608</i>
-	 */
-	public static void tobiigaze_config_set_logging(Pointer<Byte > filename, IntValuedEnum<TobiiSDKLibrary.tobiigaze_log_level > level, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_config_set_logging(Pointer.getPeer(filename), (int)level.value(), Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_config_set_logging(@Ptr long filename, int level, @Ptr long error_code);
-	/**
-	 * Gets the version of the library.<br>
-	 * @return   The version of the library on the form "1.0.2".<br>
-	 * Original signature : <code>char* tobiigaze_config_get_version()</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_config.h:614</i>
-	 */
-	public static Pointer<Byte > tobiigaze_config_get_version() {
-		return Pointer.pointerToAddress(tobiigaze_config_get_version$2(), Byte.class);
-	}
-	@Ptr 
-	@Name("tobiigaze_config_get_version") 
-	protected native static long tobiigaze_config_get_version$2();
 	public static class tobiigaze_eye_tracker extends TypedPointer {
 		public tobiigaze_eye_tracker(long address) {
 			super(address);

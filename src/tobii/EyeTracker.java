@@ -43,8 +43,14 @@ public final class EyeTracker implements Tracker {
 		public void apply(Pointer<tobiigaze_gaze_data> gaze_data,
 				Pointer<?> user_data) {
 			
-			final tobiigaze_gaze_data data = gaze_data.apply(0);			
-			final GazeEvent e = new GazeEvent();
+			final tobiigaze_gaze_data data = gaze_data.apply(0);
+						
+			final GazeEvent e = new GazeEvent(
+					configuration.elapsed(), 
+					data.timestamp(),
+					(int) data.tracking_status().value(),
+					GazeEventEyeInfo.create(data.left()),
+					GazeEventEyeInfo.create(data.right()));
 			
 			synchronized (listener) {
 				for (GazeListener l : listener) {
@@ -53,7 +59,7 @@ public final class EyeTracker implements Tracker {
 			}			
 		}
 	}	
-
+	
 	/**
 	 * Creates a new eye tracker connection for the given URL. 
 	 * 
@@ -64,6 +70,8 @@ public final class EyeTracker implements Tracker {
 	public EyeTracker(Configuration configuration) throws APIException {
 		this(configuration, null);
 	}
+
+
 
 	/**
 	 * Creates a new eye tracker connection for the given URL. 
@@ -134,9 +142,9 @@ public final class EyeTracker implements Tracker {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Tracker start() throws APIException {
-		// Check we are no already connected
+		// Check we are not already connected
 		if (this.callback != null) return this;
-	
+		
 		this.callback = new GazeCallback();
 
 		final Pointer error = Pointer.allocateInt();
@@ -153,11 +161,26 @@ public final class EyeTracker implements Tracker {
 		
 		return this;
 	}
-
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Tracker stop() throws APIException {
-		// TODO Auto-generated method stub
-		return null;
+		// Check we are already connected
+		if (this.callback == null) return this;
+		
+		final Pointer error = Pointer.allocateInt();
+				
+		try {
+			TobiiSDKLibrary.tobiigaze_stop_tracking(this.tracker, error);
+
+			configuration.except(error.getInt()); 
+		} finally {
+			error.release();			
+		}
+		
+		this.callback = null;			
+	
+		return this;
 	}
 
 	@Override
@@ -173,6 +196,20 @@ public final class EyeTracker implements Tracker {
 		synchronized (this.listener) {
 			this.listener.remove(listener);
 		}			
+		return this;
+	}
+
+	
+	@Override	
+	public EyeTracker disconnect() throws APIException {
+		if (this.tracker == null) return this;
+				
+		TobiiSDKLibrary.tobiigaze_disconnect(this.tracker);
+		TobiiSDKLibrary.tobiigaze_destroy(this.tracker);
+		
+		this.thread = null;
+		this.callback = null;
+		
 		return this;
 	}
 }

@@ -13,8 +13,13 @@ import tobii.lowlevel.sdk.TobiiSDKLibrary;
  * @author Ralf Biedert <rb@xr.io>
  */
 public class Configuration {
+		
+	private final long startTime;
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Configuration() throws APIException {
+		
+		this.startTime = System.nanoTime();
 		
 		// Initialize the configuration
 		final Pointer error = Pointer.allocateInt();
@@ -75,7 +80,32 @@ public class Configuration {
 	 * 
 	 * @return E.g., <code>2.0.0.108</code>
 	 */
-	public static String APIVersion() {
+	public String APIVersion() {
 		return TobiiSDKLibrary.tobiigaze_get_version().getCString();
 	}	
+
+	
+	/**
+	 * Returns the time elapsed since this object was created in milliseconds.
+	 * 
+	 * @return
+	 */
+	public long elapsed() {
+		return (System.nanoTime() - startTime) / (1000 * 1000);
+	}
+	
+	/**
+	 * Opens the eye tracker system control panel.
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })	
+	public void controlPanel() throws APIException{
+		final Pointer error = Pointer.allocateInt();
+		
+		try {
+			TobiiSDKConfigLibrary.tobiigaze_config_launch_control_panel(error);
+			except(error.getInt());
+		} finally {
+			error.release();
+		}	
+	}		
 }

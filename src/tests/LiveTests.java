@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import tobii.Configuration;
@@ -27,10 +25,15 @@ public class LiveTests {
 	@Test
 	public void testDeviceAddress() throws APIException {
 		final Configuration config = new Configuration();
-		Assert.assertNotNull(config.defaultTrackerURL());
-		Assert.assertTrue(config.defaultTrackerURL().contains("tet-tcp://"));
+		assertNotNull(config.defaultTrackerURL());
+		assertTrue(config.defaultTrackerURL().contains("tet-tcp://"));
 	}
 	
+	@Test
+	public void testControlPanel() throws APIException {
+		final Configuration config = new Configuration();
+		config.controlPanel();
+	}
 
 	@Test
 	public void testGazeData() throws APIException, InterruptedException {
@@ -42,13 +45,14 @@ public class LiveTests {
 			
 			@Override
 			public void gazeEvent(GazeEvent event) {
+				System.out.println(event.status);
 				ref.set(event);
 			}
 			
 			@Override
 			public void apiException(APIException exception) {
 				System.out.println(exception);
-				Assert.assertTrue(false);
+				assertTrue(false);
 			}
 		};
 		
@@ -56,6 +60,8 @@ public class LiveTests {
 		
 		Thread.sleep(500);
 		
-		Assert.assertNotNull(ref.get());		
+		tracker.stop().disconnect();
+		
+		assertNotNull(ref.get());		
 	}
 }

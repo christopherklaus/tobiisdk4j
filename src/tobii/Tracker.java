@@ -9,6 +9,8 @@ public interface Tracker {
 	 * @throws APIException
 	 */
 	public Tracker connect() throws APIException;	
+
+	public Tracker disconnect() throws APIException;	
 	
 	public Tracker start() throws APIException;
 	

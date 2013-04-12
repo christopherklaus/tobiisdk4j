@@ -17,7 +17,7 @@ import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_tracking_status;
  * a tool written by <a href="http://ochafik.com/">Olivier Chafik</a> that <a href="http://code.google.com/p/jnaerator/wiki/CreditsAndLicense">uses a few opensource projects.</a>.<br>
  * For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> or <a href="http://bridj.googlecode.com/">BridJ</a> .
  */
-@Library("TobiiSDK") 
+@Library("TobiiGazeCore64") 
 public class tobiigaze_gaze_data extends StructObject {
 	@Field(0) 
 	public long timestamp() {

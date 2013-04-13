@@ -38,12 +38,12 @@ public class MouseTracker extends AbstractTracker {
 				final GraphicsDevice device = MouseInfo.getPointerInfo().getDevice();
 				
 				double rx = point.getX() / device.getDisplayMode().getWidth();
-				double ry = point.getX() / device.getDisplayMode().getWidth();
+				double ry = point.getY() / device.getDisplayMode().getHeight();
 				
 				V2 pos = new V2(rx, ry);
 				
-				V2 left = pos.add(-0.01).add(Vn.random(2).add(-0.5).mul(0.01)).v2();
-				V2 right = pos.add(0.01).add(Vn.random(2).add(-0.5).mul(0.01)).v2();
+				V2 left = pos.add(Vn.random(2).add(-0.5).mul(0.01)).v2();
+				V2 right = pos.add(Vn.random(2).add(-0.5).mul(0.01)).v2();
 				
 								
 				final GazeEvent e = new GazeEvent(

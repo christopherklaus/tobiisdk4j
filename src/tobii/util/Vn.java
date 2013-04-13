@@ -24,6 +24,53 @@ public class Vn {
 		return this.values[i];
 	}
 
+	public Vn mul(double v) {
+		double x[] = new double[dim()];
+
+		for (int i = 0; i < x.length; i++) {
+			x[i] = get(i) * v;
+		}
+
+		return new Vn(x);
+	}
+
+	public Vn add(double v) {
+		double x[] = new double[dim()];
+
+		for (int i = 0; i < x.length; i++) {
+			x[i] = get(i) + v;
+		}
+
+		return new Vn(x);
+	}
+
+	public Vn add(Vn v) {
+		double x[] = new double[dim()];
+
+		for (int i = 0; i < x.length; i++) {
+			x[i] = get(i) + v.get(i);
+		}
+
+		return new Vn(x);
+	}
+
+	public V2 v2() {
+		return new V2(get(0), get(1));
+	}
+
+	public V3 v3() {
+		return new V3(get(0), get(1), get(2));
+	}
+
+	public static Vn random(int n) {
+		double x[] = new double[n];
+		for (int i = 0; i < x.length; i++) {
+			x[i] = Math.random();
+		}
+
+		return new Vn(x);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

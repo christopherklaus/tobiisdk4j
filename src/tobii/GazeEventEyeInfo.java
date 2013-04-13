@@ -45,10 +45,18 @@ public class GazeEventEyeInfo implements Serializable {
 		return new V2(p.x(), p.y());		
 	}
 
+	
 	protected static GazeEventEyeInfo create(tobiigaze_gaze_data_eye data) {				
 		return new GazeEventEyeInfo(v3(data.eye_position_from_eye_tracker_mm()),
 				v3(data.eye_position_in_track_box_normalized()),
 				v3(data.gaze_point_from_eye_tracker_mm()),
 				v2(data.gaze_point_on_display_normalized()));
+	}
+	
+	protected static GazeEventEyeInfo fake(V2 posNorm) {				
+		return new GazeEventEyeInfo(new V3(0, 0, 0),
+				new V3(0, 0, 0),
+				new V3(0, 0, 0),
+				posNorm);
 	}
 }

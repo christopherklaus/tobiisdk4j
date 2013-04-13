@@ -1,8 +1,5 @@
 package tobii;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.bridj.Pointer;
 import org.bridj.Pointer.StringType;
 
@@ -16,9 +13,8 @@ import tobii.lowlevel.sdk.tobiigaze_gaze_data;
  * 
  * @author Ralf Biedert <rb@xr.io>
  */
-public final class EyeTracker implements Tracker {
+public final class EyeTracker extends AbstractTracker {
 
-	private final List<GazeListener> listener; 
 	private final Configuration configuration;	
 	private final String url;
 	
@@ -52,11 +48,7 @@ public final class EyeTracker implements Tracker {
 					GazeEventEyeInfo.create(data.left()),
 					GazeEventEyeInfo.create(data.right()));
 			
-			synchronized (listener) {
-				for (GazeListener l : listener) {
-					l.gazeEvent(e);
-				}
-			}			
+			dispatchGazeEvent(e);
 		}
 	}	
 	
@@ -83,7 +75,6 @@ public final class EyeTracker implements Tracker {
 	 * 
 	 */
 	public EyeTracker(Configuration configuration, String url) throws APIException {
-		this.listener = new LinkedList<GazeListener>();
 		this.configuration = configuration;			
 		this.url = url == null || "".equals(url) ? configuration.defaultTrackerURL() : url; 
 	}
@@ -183,21 +174,6 @@ public final class EyeTracker implements Tracker {
 		return this;
 	}
 
-	@Override
-	public Tracker register(GazeListener listener) {
-		synchronized (this.listener) {
-			this.listener.add(listener);
-		}
-		return this;
-	}
-	
-	@Override
-	public Tracker deregister(GazeListener listener) {
-		synchronized (this.listener) {
-			this.listener.remove(listener);
-		}			
-		return this;
-	}
 
 	
 	@Override	

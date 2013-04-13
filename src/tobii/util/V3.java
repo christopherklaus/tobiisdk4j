@@ -5,15 +5,15 @@ public class V3 extends Vn {
 		super(x, y, z);
 	}
 	
-	public double X() {
+	public double x() {
 		return get(0);
 	}
 	
-	public double Y() {
+	public double y() {
 		return get(1);
 	}
 	
-	public double Z() {
+	public double z() {
 		return get(2);
 	}
 }

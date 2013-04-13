@@ -5,11 +5,11 @@ public class V2 extends Vn {
 		super(x, y);
 	}
 	
-	public double X() {
+	public double x() {
 		return get(0);
 	}
 	
-	public double Y() {
+	public double y() {
 		return get(1);
 	}
 

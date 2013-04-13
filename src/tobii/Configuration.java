@@ -6,6 +6,7 @@ import org.bridj.Pointer.StringType;
 
 import tobii.lowlevel.config.TobiiSDKConfigLibrary;
 import tobii.lowlevel.sdk.TobiiSDKLibrary;
+import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_error_code;
 
 /**
  * The low level eye tracking configuration
@@ -66,14 +67,17 @@ public class Configuration {
 	protected void except(int code) throws APIException {
 		if (code == 0) return;
 		
-		throw new APIException(code);
+		throw new APIException(code, exceptionMessage(code));
 	}
 	
 	protected APIException exception(int code) {
 		if (code == 0) return null;		
-		return new APIException(code);
+		return new APIException(code, exceptionMessage(code));
 	}
 	
+	protected static String exceptionMessage(int code) {
+		return "TODO";
+	}
 	
 	/**
 	 * Returns the version of the native API.

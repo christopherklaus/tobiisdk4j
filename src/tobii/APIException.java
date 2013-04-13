@@ -11,8 +11,12 @@ public class APIException extends Exception {
 	
 	private final int value;
 	
-	public APIException(int value) {
+	private final String message;
+
+	
+	public APIException(int value, String message) {
 		this.value = value;
+		this.message = message;
 	}
 
 	/**

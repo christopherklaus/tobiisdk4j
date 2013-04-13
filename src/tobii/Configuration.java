@@ -6,7 +6,6 @@ import org.bridj.Pointer.StringType;
 
 import tobii.lowlevel.config.TobiiSDKConfigLibrary;
 import tobii.lowlevel.sdk.TobiiSDKLibrary;
-import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_error_code;
 
 /**
  * The low level eye tracking configuration

@@ -1,8 +1,6 @@
 package tobii;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 

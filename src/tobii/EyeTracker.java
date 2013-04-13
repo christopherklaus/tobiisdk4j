@@ -7,9 +7,9 @@ import org.bridj.Pointer;
 import org.bridj.Pointer.StringType;
 
 import tobii.lowlevel.sdk.TobiiSDKLibrary;
-import tobii.lowlevel.sdk.tobiigaze_gaze_data;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_eye_tracker;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_gaze_listener;
+import tobii.lowlevel.sdk.tobiigaze_gaze_data;
 
 /**
  * Represents a true eye tracking device.

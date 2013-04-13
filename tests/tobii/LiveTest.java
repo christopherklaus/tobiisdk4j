@@ -1,16 +1,11 @@
 package tobii;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Test;
-
-import tobii.Configuration;
-import tobii.EyeTracker;
-import tobii.APIException;
-import tobii.GazeEvent;
-import tobii.GazeListener;
 
 public class LiveTest {
 

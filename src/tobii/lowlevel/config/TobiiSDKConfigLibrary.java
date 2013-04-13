@@ -1,6 +1,7 @@
 package tobii.lowlevel.config;
 import java.util.Collections;
 import java.util.Iterator;
+
 import org.bridj.BridJ;
 import org.bridj.CRuntime;
 import org.bridj.Callback;

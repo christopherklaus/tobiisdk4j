@@ -30,7 +30,11 @@ abstract class AbstractTracker implements Tracker {
 	protected void dispatchGazeEvent(GazeEvent e) {
 		synchronized (listener) {
 			for (GazeListener l : listener) {
-				l.gazeEvent(e);
+				try{
+					l.gazeEvent(e);					
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
 		}			
 	}

@@ -70,6 +70,14 @@ public class Vn {
 
 		return new Vn(x);
 	}
+	
+	public double sum() {
+		double rval = 0;
+		for (double d : this.values) {
+			rval += d;
+		}
+		return rval;
+	}
 
 	@Override
 	public String toString() {

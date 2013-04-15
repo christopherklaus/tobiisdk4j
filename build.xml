@@ -36,6 +36,12 @@
                 </fileset>
             </classpath>
         </javac>
+    	
+    	<copy todir="${build.root}/bin">
+    	    <fileset dir="src"
+    	             includes="**/*.dll" />
+    	</copy>
+	
     </target>
 
 	
@@ -45,8 +51,6 @@
         <mkdir dir="${distribution.root}/"/>
            
     	<copy file="lib/bridj-0.6.2-windows-only.jar" tofile="${distribution.root}/bridj-0.6.2-windows-only.jar"/>
-    	<copy file="lib/TobiiGazeConfig64.dll" tofile="${distribution.root}/TobiiGazeConfig64.dll"/>
-        <copy file="lib/TobiiGazeCore64.dll" tofile="${distribution.root}/TobiiGazeCore64.dll"/>
     	
     	<!-- Rejar everything -->
         <jar destfile="${distribution.root}/${prefix}-${version}.jar" basedir="${build.root}/bin"/>
@@ -65,8 +69,8 @@
                     <filename name="*.jar"/>
                 </fileset>
             </classpath>
-        </javac>    	
-    	        
+        </javac>    	    	           
+    	
         <!-- Run all testcases -->
         <junit printsummary="true" haltonfailure="true" fork="true">
             <formatter type="plain" usefile="false"/>

@@ -15,7 +15,10 @@ public class SimpleClient {
 			
 			@Override
 			public void gazeEvent(GazeEvent event) {
-				System.out.println(event.nanoTimeReceived);
+				System.out.println(event.left.gazeOnDisplayNorm); // -1, -1 
+				System.out.println(event.left.eyePosFromTrackerMM); // 0, 0, 0
+				System.out.println(event.left.eyePosInBoxNorm); // -1, -1, 0
+				System.out.println(event.left.gazeFromTrackerMM); // 0, 0, 0
 			}
 			
 			@Override

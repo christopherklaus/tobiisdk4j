@@ -44,7 +44,13 @@ public class GazeEventEyeInfo implements Serializable {
 	private static V2 v2(tobiigaze_point_2d p) {
 		return new V2(p.x(), p.y());		
 	}
-
+	
+	public static GazeEventEyeInfo createInvalid() {
+		return new GazeEventEyeInfo(new V3(0, 0, 0),
+				new V3(-1, -1, 0),
+				new V3(0, 0, 0),
+				new V2(-1, -1));
+	}
 	
 	protected static GazeEventEyeInfo create(tobiigaze_gaze_data_eye data) {				
 		return new GazeEventEyeInfo(v3(data.eye_position_from_eye_tracker_mm()),
@@ -54,9 +60,17 @@ public class GazeEventEyeInfo implements Serializable {
 	}
 	
 	protected static GazeEventEyeInfo fake(V2 posNorm) {				
-		return new GazeEventEyeInfo(new V3(0, 0, 0),
-				new V3(0, 0, 0),
+		return new GazeEventEyeInfo(new V3(0.0, 0.0, 750.0),
+				new V3(0.5, 0.5, 0.8),
 				new V3(0, 0, 0),
 				posNorm);
+	}
+	
+	
+	/** Just from looking at the values, does this appear to be a valid event. */
+	protected boolean validByValues() {
+		// Little hacky to improve center calculation.
+		if(eyePosFromTrackerMM.sum() == 0 && gazeFromTrackerMM.sum() == 0 && gazeOnDisplayNorm.sum() <= 2.0) return false;
+		return true;
 	}
 }

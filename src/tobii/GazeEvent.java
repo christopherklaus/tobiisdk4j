@@ -34,4 +34,28 @@ public class GazeEvent implements Serializable {
 	
 	/** Eye info for the user's right eye */
 	public final GazeEventEyeInfo right;	
+	
+	
+	/**
+	 * Returns the best guess for the combined (a.k.a "center") gaze position.
+	 * 
+	 * @return The center gaze position based on both or one eye.
+	 */
+	public final GazeEventEyeInfo center() {
+		
+		GazeEventEyeInfo a = left.validByValues() ? left : right;
+		GazeEventEyeInfo b = right.validByValues() ? right : left;
+		
+		// In case both are invalid, return invalid for center
+		if (! (a.validByValues() || b.validByValues())) {
+			return b;
+		}
+		
+		// Return an averaged result
+		return new GazeEventEyeInfo(
+				a.eyePosFromTrackerMM.add(b.eyePosFromTrackerMM).mul(0.5).v3(), 
+				a.eyePosInBoxNorm.add(b.eyePosInBoxNorm).mul(0.5).v3(), 
+				a.gazeFromTrackerMM.add(b.gazeFromTrackerMM).mul(0.5).v3(), 
+				a.gazeOnDisplayNorm.add(b.gazeOnDisplayNorm).mul(0.5).v2());
+	}
 }

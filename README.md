@@ -48,6 +48,10 @@ In addition, you might want to add a `Thread.sleep(100000)`, to prevent the appl
 
   Please see the [Tobii Gaze SDK](http://www.tobii.com/gaze-interaction/global/products-services/tobii-gaze-sdk/) for information on function calls and variable meanings.
 
+  * __How much latency does the wrapping add?__
+
+  The overall added latency should be well below 1ms. However, garbage collection in the JVM  might cause longer delays if an inappropriate collector is being used. In case you are developing latency-sensitive applications consult the [JVM documentation](http://www.oracle.com/technetwork/java/javase/tech/g1-intro-jsp-135488.html). 
+
 
   * __Does it work with 32bit JVMs?__
 

@@ -16,4 +16,5 @@ public class V3 extends Vn {
 	public double z() {
 		return get(2);
 	}
+
 }

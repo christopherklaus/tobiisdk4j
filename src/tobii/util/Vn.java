@@ -1,5 +1,8 @@
 package tobii.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * An n dimensional vector.
  * 
@@ -78,7 +81,14 @@ public class Vn {
 		}
 		return rval;
 	}
-
+	
+	
+	public double median() {
+		double[] ds = this.values.clone();		
+		Arrays.sort(ds);
+		return ds[ds.length / 2];
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -89,5 +99,18 @@ public class Vn {
 		}
 		sb.replace(sb.length() - 2, sb.length(), ")");
 		return sb.toString();
+	}
+
+	
+	public static Vn row(List<Vn> past, int i) {
+		final double vals[] = new double[past.size()];
+		
+		int ptr = 0;
+		
+		for (Vn v : past) {
+			vals[ptr++] = v.get(i);
+		}
+		
+		return new Vn(vals); 
 	}
 }

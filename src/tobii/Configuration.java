@@ -75,7 +75,7 @@ public class Configuration {
 	}
 	
 	protected static String exceptionMessage(int code) {
-		return "TODO";
+		return "TODO (" + code + ")";
 	}
 	
 	/**

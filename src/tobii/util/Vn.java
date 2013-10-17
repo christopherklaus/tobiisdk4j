@@ -100,6 +100,17 @@ public class Vn {
 		sb.replace(sb.length() - 2, sb.length(), ")");
 		return sb.toString();
 	}
+	
+	
+	public double length() {
+		double rval = 0;
+		
+		for (int i = 0; i < this.dim(); i++) {
+			rval += get(i) * get(i);
+		}
+		
+		return Math.sqrt(rval);
+	}
 
 	
 	public static Vn row(List<Vn> past, int i) {
@@ -112,5 +123,5 @@ public class Vn {
 		}
 		
 		return new Vn(vals); 
-	}
+	}	
 }

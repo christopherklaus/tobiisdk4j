@@ -591,11 +591,11 @@ public class TobiiSDKLibrary {
 	 * Original signature : <code>char* tobiigaze_convert_error_code_to_string(tobiigaze_error_code)</code><br>
 	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:512</i>
 	 */
-	public static Pointer<Byte > tobiigaze_convert_error_code_to_string(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code) {
+/*	public static Pointer<Byte > tobiigaze_convert_error_code_to_string(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code) {
 		return Pointer.pointerToAddress(tobiigaze_convert_error_code_to_string((int)error_code.value()), Byte.class);
 	}
-	@Ptr 
-	protected native static long tobiigaze_convert_error_code_to_string(int error_code);
+*/	@Ptr 
+	/*protected native static long tobiigaze_convert_error_code_to_string(int error_code);*/
 	public static class tobiigaze_eye_tracker extends TypedPointer {
 		public tobiigaze_eye_tracker(long address) {
 			super(address);

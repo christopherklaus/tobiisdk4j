@@ -65,7 +65,7 @@ public class Configuration {
 	 */
 	protected void except(int code) throws APIException {
 		if (code == 0) return;
-		
+				
 		throw new APIException(code, exceptionMessage(code));
 	}
 	

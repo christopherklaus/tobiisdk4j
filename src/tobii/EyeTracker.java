@@ -6,7 +6,9 @@ import org.bridj.Pointer.StringType;
 import tobii.lowlevel.sdk.TobiiSDKLibrary;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_eye_tracker;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_gaze_listener;
+import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_key_provider_callback;
 import tobii.lowlevel.sdk.tobiigaze_gaze_data;
+import tobii.lowlevel.sdk.tobiigaze_key;
 
 /**
  * Represents a true eye tracking device.
@@ -24,9 +26,21 @@ public final class EyeTracker extends AbstractTracker {
 	/** Worker thread */ 
 	private Thread thread;	
 	
-	/** I'll call back ... */
+	/** Our callbacks ... */
 	private GazeCallback callback;
+	private KeyProviderCallback keycallback;
+
+	/** Key to transmit */
+	private String key;
 	
+	
+	protected class KeyProviderCallback extends tobiigaze_key_provider_callback {
+		@Override
+		public void apply(int realm_id, Pointer<tobiigaze_key> ptr) {
+			ptr.setString(key, StringType.C);			
+		}				
+	}	
+
 	
 	/**
 	 * Internally used callback for gaze.
@@ -78,17 +92,30 @@ public final class EyeTracker extends AbstractTracker {
 		this.configuration = configuration;			
 		this.url = url == null || "".equals(url) ? configuration.defaultTrackerURL() : url; 
 	}
+	
+	/***
+	 * Sets the cheat code to use ...
+	 * 
+	 * @param realm
+	 * @param key
+	 * @return
+	 */
+	public EyeTracker cheatcode(String key) {
+		this.key = key;		
+		return this;
+	}
 		
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override	
 	public EyeTracker connect() throws APIException {
 		final Pointer error = Pointer.allocateInt();
-		final Pointer url = Pointer.allocateChars(1000);
+		final Pointer url = Pointer.allocateChars(1000);		
 		
 		try {
 			// Set the actual URL string we got previously
 			url.setString(this.url, StringType.C);
+			
 			
 			// Create the tracker object
 			this.tracker = TobiiSDKLibrary.tobiigaze_create((Pointer<Byte>) url);			
@@ -116,15 +143,18 @@ public final class EyeTracker extends AbstractTracker {
 			
 			// Event loop must run in background			
 			this.thread.setDaemon(true);
-			this.thread.start();		
+			this.thread.start();
 			
-			
+			this.keycallback = new KeyProviderCallback();
+			TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error);
+			configuration.except(error.getInt()); 
+									
 			// Actually connect to the device
 			TobiiSDKLibrary.tobiigaze_connect(tracker, error);
-			configuration.except(error.getInt()); 
+			configuration.except(error.getInt());			
 		} finally {
 			url.release();
-			error.release();			
+			error.release();	
 		}
 		
 		return this;

@@ -65,6 +65,7 @@ public final class EyeTracker extends AbstractTracker {
 			dispatchGazeEvent(e);
 		}
 	}	
+		
 	
 	/**
 	 * Creates a new eye tracker connection for the given URL. 

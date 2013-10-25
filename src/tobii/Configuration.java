@@ -16,11 +16,12 @@ public class Configuration {
 		
 	private final long startTime;
 
+	public Configuration() {	
+		this.startTime = System.nanoTime();		
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public Configuration() throws APIException {
-		
-		this.startTime = System.nanoTime();
-		
+	public Configuration init() throws APIException {
 		// Initialize the configuration
 		final Pointer error = Pointer.allocateInt();
 				
@@ -28,8 +29,10 @@ public class Configuration {
 			TobiiSDKConfigLibrary.tobiigaze_config_init((Pointer<IntValuedEnum<TobiiSDKConfigLibrary.tobiigaze_error_code >>) error);		
 			except(error.getInt());
 		} finally {
-			error.release();
+			error.release();			
 		}	
+		
+		return this;		
 	}
 	
 	

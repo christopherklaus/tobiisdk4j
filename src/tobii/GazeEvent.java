@@ -41,8 +41,7 @@ public class GazeEvent implements Serializable {
 	 * 
 	 * @return The center gaze position based on both or one eye.
 	 */
-	public final GazeEventEyeInfo center() {
-		
+	public final GazeEventEyeInfo center() {		
 		GazeEventEyeInfo a = left.validByValues() ? left : right;
 		GazeEventEyeInfo b = right.validByValues() ? right : left;
 		

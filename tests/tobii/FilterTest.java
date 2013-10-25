@@ -14,7 +14,7 @@ public class FilterTest {
 	@Test
 	public void testMedian() {
 						
-		Filter m = Filter.MEDIAN;
+		Filter m = Filter.MEDIAN(3);
 		m.filter(new Vn(1, 4));
 		m.filter(new Vn(3, 6));
 		Vn res = m.filter(new Vn(2, 0));

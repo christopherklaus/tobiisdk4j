@@ -65,4 +65,13 @@ public class GazeEvent implements Serializable {
 				a.gazeFromTrackerMM.add(b.gazeFromTrackerMM).mul(0.5).v3(), 
 				a.gazeOnDisplayNorm.add(b.gazeOnDisplayNorm).mul(0.5).v2());
 	}
+	
+	public double gazedelta() {
+		// Only compute this of both eyes are visible
+		if (status == 1)
+			return left.gazeOnDisplayNorm.dist(right.gazeOnDisplayNorm);
+		
+		// Otherwise the delta will be based on one eye only.
+		else return 0;
+	}
 }

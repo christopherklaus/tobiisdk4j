@@ -26,4 +26,10 @@ public class V2 extends Vn {
 	public double atan2() {
 		return Math.atan2(y(), x());
 	}
+	
+	public double dist(V2 other) {
+		double dx = x() - other.x();
+		double dy = y() - other.y();		
+		return Math.sqrt(dx*dx + dy*dy);
+	}
 }

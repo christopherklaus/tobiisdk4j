@@ -11,7 +11,6 @@ public class GazeEvent implements Serializable {
 	/** */
 	private static final long serialVersionUID = -8792167654827535512L;
 
-	
 	public GazeEvent(long nanoTimeReceived, long eventTime, int status, GazeEventEyeInfo left, GazeEventEyeInfo right) {
 		this.nanoTimeReceived = nanoTimeReceived;
 		this.eventTime = eventTime;		 
@@ -26,7 +25,17 @@ public class GazeEvent implements Serializable {
 	/** The internal timestamp on the Tobii / native Win32 side when this was recorded */
 	public final long eventTime;
 	
-	/** The tracking status code (0 == no eyes, 1 == both eyes, rest: see API) */
+	/*		
+		TOBIIGAZE_TRACKING_STATUS_NO_EYES_TRACKED(0),
+		TOBIIGAZE_TRACKING_STATUS_BOTH_EYES_TRACKED(1),
+		TOBIIGAZE_TRACKING_STATUS_ONLY_LEFT_EYE_TRACKED(2),
+		TOBIIGAZE_TRACKING_STATUS_ONE_EYE_TRACKED_PROBABLY_LEFT(3),
+		TOBIIGAZE_TRACKING_STATUS_ONE_EYE_TRACKED_UNKNOWN_WHICH(4),
+		TOBIIGAZE_TRACKING_STATUS_ONE_EYE_TRACKED_PROBABLY_RIGHT(5),
+		TOBIIGAZE_TRACKING_STATUS_ONLY_RIGHT_EYE_TRACKED(6);
+	 */		
+
+	/** The tracking status code (0 == no eyes, 1 == both eyes, rest: see above) */
 	public final int status;
 	
 	/** Eye info for the user's left eye */
@@ -34,19 +43,18 @@ public class GazeEvent implements Serializable {
 	
 	/** Eye info for the user's right eye */
 	public final GazeEventEyeInfo right;	
-	
-	
+		
 	/**
 	 * Returns the best guess for the combined (a.k.a "center") gaze position.
 	 * 
 	 * @return The center gaze position based on both or one eye.
 	 */
 	public final GazeEventEyeInfo center() {		
-		GazeEventEyeInfo a = left.validByValues() ? left : right;
-		GazeEventEyeInfo b = right.validByValues() ? right : left;
+		GazeEventEyeInfo a = status == 1 || status == 2 || status == 3 ? left : right;
+		GazeEventEyeInfo b = status == 1 || status == 6 || status == 5 ? right : left;
 		
-		// In case both are invalid, return invalid for center
-		if (! (a.validByValues() || b.validByValues())) {
+		// In case both are invalid, return some invalid for center
+		if (status == 0 || status == 4) {
 			return b;
 		}
 		

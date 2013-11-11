@@ -20,6 +20,12 @@ public class Configuration {
 		this.startTime = System.nanoTime();		
 	}
 	
+	
+	/**
+	 * Initializes the configuration.
+	 * @return
+	 * @throws APIException
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Configuration init() throws APIException {
 		// Initialize the configuration

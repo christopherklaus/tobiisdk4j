@@ -16,12 +16,11 @@ import tobii.lowlevel.sdk.tobiigaze_key;
  * @author Ralf Biedert <rb@xr.io>
  */
 public final class EyeTracker extends AbstractTracker {
-
-	private final Configuration configuration;	
 	private final String url;
+	private final Configuration configuration;		
 	
 	/** The actual eye tracker object */ 
-	private Pointer<tobiigaze_eye_tracker> tracker;
+	private Pointer<tobiigaze_eye_tracker> tracker;	
 	
 	/** Worker thread */ 
 	private Thread thread;	

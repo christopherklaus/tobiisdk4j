@@ -64,13 +64,5 @@ public class GazeEventEyeInfo implements Serializable {
 				new V3(0.5, 0.5, 0.8),
 				new V3(0, 0, 0),
 				posNorm);
-	}
-	
-	
-	/** Just from looking at the values, does this appear to be a valid event. */
-	protected boolean validByValues() {
-		// Little hacky to improve center calculation.
-		if(eyePosFromTrackerMM.sum() == 0 && gazeFromTrackerMM.sum() == 0 && gazeOnDisplayNorm.sum() <= 2.0) return false;
-		return true;
-	}
+	}	
 }

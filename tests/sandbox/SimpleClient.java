@@ -9,7 +9,7 @@ import tobii.GazeListener;
 public class SimpleClient {
 
 	public static void main(String[] args) throws APIException, InterruptedException {
-		final Configuration config = new Configuration();
+		final Configuration config = new Configuration().init();
 		final EyeTracker tracker = new EyeTracker(config);		
 		final GazeListener listener = new GazeListener() {
 			

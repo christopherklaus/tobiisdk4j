@@ -145,9 +145,12 @@ public final class EyeTracker extends AbstractTracker {
 			this.thread.setDaemon(true);
 			this.thread.start();
 			
-			this.keycallback = new KeyProviderCallback();
-			TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error);
-			configuration.except(error.getInt()); 
+			// Only register key provider if we have set a key.
+			if (this.key != null) {
+				this.keycallback = new KeyProviderCallback();
+				TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error);
+				configuration.except(error.getInt()); 				
+			}
 									
 			// Actually connect to the device
 			TobiiSDKLibrary.tobiigaze_connect(tracker, error);

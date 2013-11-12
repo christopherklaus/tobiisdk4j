@@ -16,7 +16,7 @@ Download the __[latest release of the Java Bindings](http://s.xr.io/tobiisdk4j/l
   
 Paste this code into your `main()`:
 
-	final Configuration config = new Configuration();	
+	final Configuration config = new Configuration().initialize();	
 	final EyeTracker tracker = new EyeTracker(config);	
 
 	final GazeListener listener = new GazeListener() {	
@@ -38,6 +38,8 @@ In addition, you might want to add a `Thread.sleep(100000)`, to prevent the appl
 
 ## News / Changelog ##
 
+  * (2013/11/12) -- Version 1.0, should work with all Tobii REX and X2 eye trackers. 
+
   * (2013/04/15) -- Initial release, core features working.
 
 
@@ -55,7 +57,7 @@ In addition, you might want to add a `Thread.sleep(100000)`, to prevent the appl
 
   * __Does it work with 32bit JVMs?__
 
-  Not at the moment. Please update to a 64bit JVM.
+  No. Please update to a 64bit JVM.
 
 
 ## License ##

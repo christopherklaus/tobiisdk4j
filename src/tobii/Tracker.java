@@ -18,6 +18,7 @@ public interface Tracker {
 
 	public Tracker register(GazeListener listener);
 	
-	public Tracker deregister(GazeListener listener);	
-
+	public Tracker deregister(GazeListener listener);
+	
+	public String url();
 }

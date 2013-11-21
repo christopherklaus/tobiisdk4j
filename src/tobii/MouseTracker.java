@@ -69,4 +69,9 @@ public class MouseTracker extends AbstractTracker {
 		this.timer = null;
 		return this;
 	}
+
+	@Override
+	public String url() {
+		return "tet-mouse://default";
+	}
 }

@@ -104,6 +104,8 @@ public final class EyeTracker extends AbstractTracker {
 		this.key = key;		
 		return this;
 	}
+	
+	
 		
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -220,5 +222,11 @@ public final class EyeTracker extends AbstractTracker {
 		this.callback = null;
 		
 		return this;
+	}
+
+
+	@Override
+	public String url() {
+		return this.url;
 	}
 }

@@ -63,7 +63,16 @@ public final class EyeTracker extends AbstractTracker {
 			dispatchGazeEvent(e);
 		}
 	}	
-		
+	
+	/**
+	 * Just creates an eye tracker object with the default URL.
+	 * 
+	 * @throws APIException
+	 */
+	public EyeTracker() throws APIException {
+		this(null);
+	}
+
 
 	/**
 	 * Creates a new eye tracker connection for the given URL. 
@@ -78,10 +87,6 @@ public final class EyeTracker extends AbstractTracker {
 		this.url = url; 
 	}
 	
-	public EyeTracker() throws APIException {
-		this(null);
-	}
-
 	/***
 	 * Sets the cheat code to use ...
 	 * 
@@ -94,16 +99,26 @@ public final class EyeTracker extends AbstractTracker {
 		return this;
 	}
 	
-		
-	protected APIException exception(int exception) {
-		return new APIException(exception, "No message :(");
+	
+	/**
+	 * Returns an appropriate exception.
+	 * 
+	 * @param message
+	 * @return
+	 */
+	protected APIException exception(int message) {
+		if (message == 0) return null;
+		return new APIException(message, "Tobii Exception " + message);
 	}
+	
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override	
 	public EyeTracker connect() throws APIException {
 		final Pointer error = Pointer.allocateInt();
 		final Pointer url = Pointer.allocateChars(1000);		
+		
+		error.setInt(0);
 		
 		try {
 			// Set the actual URL string we got previously
@@ -112,13 +127,12 @@ public final class EyeTracker extends AbstractTracker {
 			} else {
 				url.setString(this.url, StringType.C);	
 			}			
-			
-			System.out.println(error.getInt());
-			System.out.println(url.getString(StringType.C));
+
+			// If there was an error getting the tracker, throw exception.
+			if (error.getInt() > 0) throw exception(error.getInt());
 					
 			// Create the tracker object
 			this.tracker = TobiiSDKLibrary.tobiigaze_create((Pointer<Byte>) url, error);
-
 			this.thread = new Thread(new Runnable() {			
 				@Override
 				public void run() {
@@ -152,10 +166,9 @@ public final class EyeTracker extends AbstractTracker {
 				exception(error.getInt()); 				
 			}
 									
-			// Actually connect to the device
-			
+			// Actually connect to the device			
 			TobiiSDKLibrary.tobiigaze_connect(tracker, error);			
-			exception(error.getInt()); 				
+			if (error.getInt() > 0) throw exception(error.getInt());
 		} finally {
 			url.release();
 			error.release();	

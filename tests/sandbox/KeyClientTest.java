@@ -1,7 +1,6 @@
 package sandbox;
 
 import tobii.APIException;
-import tobii.Configuration;
 import tobii.EyeTracker;
 import tobii.GazeEvent;
 import tobii.GazeListener;
@@ -9,9 +8,7 @@ import tobii.GazeListener;
 public class KeyClientTest {
 
 	public static void main(String[] args) throws APIException, InterruptedException {
-		final Configuration config = new Configuration();
-		final EyeTracker tracker = new EyeTracker(config, "tet-tcp://xxx.local.");		
-				
+		final EyeTracker tracker = new EyeTracker("tet-tcp://PCEGO-010103001713.local.");																	 				
 		final GazeListener listener = new GazeListener() {
 			
 			@Override

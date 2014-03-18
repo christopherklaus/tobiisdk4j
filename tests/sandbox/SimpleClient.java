@@ -1,16 +1,18 @@
 package sandbox;
 
+import org.bridj.Pointer;
+import org.bridj.Pointer.StringType;
+
 import tobii.APIException;
-import tobii.Configuration;
 import tobii.EyeTracker;
 import tobii.GazeEvent;
 import tobii.GazeListener;
+import tobii.lowlevel.sdk.TobiiSDKLibrary;
 
 public class SimpleClient {
 
-	public static void main(String[] args) throws APIException, InterruptedException {
-		final Configuration config = new Configuration().init();
-		final EyeTracker tracker = new EyeTracker(config);		
+	public static void main(String[] args) throws APIException, InterruptedException {		
+		final EyeTracker tracker = new EyeTracker();		
 		final GazeListener listener = new GazeListener() {
 			
 			@Override
@@ -27,8 +29,7 @@ public class SimpleClient {
 			}
 		};
 		
-		tracker.connect().register(listener).start();
-		
+		tracker.connect().register(listener).start();	
 		Thread.sleep(50000);
 	}
 

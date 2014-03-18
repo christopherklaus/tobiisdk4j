@@ -8,6 +8,7 @@ import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_eye_tracker;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_gaze_listener;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_key_provider_callback;
 import tobii.lowlevel.sdk.tobiigaze_gaze_data;
+import tobii.lowlevel.sdk.tobiigaze_gaze_data_extensions;
 import tobii.lowlevel.sdk.tobiigaze_key;
 
 /**
@@ -17,7 +18,6 @@ import tobii.lowlevel.sdk.tobiigaze_key;
  */
 public final class EyeTracker extends AbstractTracker {
 	private final String url;
-	private final Configuration configuration;		
 	
 	/** The actual eye tracker object */ 
 	private Pointer<tobiigaze_eye_tracker> tracker;	
@@ -35,9 +35,9 @@ public final class EyeTracker extends AbstractTracker {
 	
 	protected class KeyProviderCallback extends tobiigaze_key_provider_callback {
 		@Override
-		public void apply(int realm_id, Pointer<tobiigaze_key> ptr) {
+		public void apply(int realm_id, Pointer<tobiigaze_key> ptr, Pointer<?> user_data) {
 			ptr.setString(key, StringType.C);			
-		}				
+		}
 	}	
 
 	
@@ -49,8 +49,7 @@ public final class EyeTracker extends AbstractTracker {
 	protected class GazeCallback extends tobiigaze_gaze_listener {		
 		
 		@Override
-		public void apply(Pointer<tobiigaze_gaze_data> gaze_data,
-				Pointer<?> user_data) {
+		public void apply(Pointer<tobiigaze_gaze_data > gaze_data, Pointer<tobiigaze_gaze_data_extensions > gaze_data_extensions, Pointer<? > user_data) {
 			
 			final tobiigaze_gaze_data data = gaze_data.apply(0);
 						
@@ -65,19 +64,6 @@ public final class EyeTracker extends AbstractTracker {
 		}
 	}	
 		
-	
-	/**
-	 * Creates a new eye tracker connection for the given URL. 
-	 * 
-	 * @param configuration
-	 * 
-	 * @throws APIException
-	 */
-	public EyeTracker(Configuration configuration) throws APIException {
-		this(configuration, null);
-	}
-
-
 
 	/**
 	 * Creates a new eye tracker connection for the given URL. 
@@ -88,11 +74,14 @@ public final class EyeTracker extends AbstractTracker {
 	 * @throws APIException
 	 * 
 	 */
-	public EyeTracker(Configuration configuration, String url) throws APIException {
-		this.configuration = configuration;			
-		this.url = url == null || "".equals(url) ? configuration.defaultTrackerURL() : url; 
+	public EyeTracker(String url) throws APIException {
+		this.url = url; 
 	}
 	
+	public EyeTracker() throws APIException {
+		this(null);
+	}
+
 	/***
 	 * Sets the cheat code to use ...
 	 * 
@@ -105,8 +94,10 @@ public final class EyeTracker extends AbstractTracker {
 		return this;
 	}
 	
-	
 		
+	protected APIException exception(int exception) {
+		return new APIException(exception, "No message :(");
+	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override	
@@ -116,11 +107,18 @@ public final class EyeTracker extends AbstractTracker {
 		
 		try {
 			// Set the actual URL string we got previously
-			url.setString(this.url, StringType.C);
+			if (this.url == null || "".equals(this.url)) {
+				TobiiSDKLibrary.tobiigaze_get_connected_eye_tracker(url, 1000, error);
+			} else {
+				url.setString(this.url, StringType.C);	
+			}			
 			
-			
+			System.out.println(error.getInt());
+			System.out.println(url.getString(StringType.C));
+					
 			// Create the tracker object
-			this.tracker = TobiiSDKLibrary.tobiigaze_create((Pointer<Byte>) url);			
+			this.tracker = TobiiSDKLibrary.tobiigaze_create((Pointer<Byte>) url, error);
+
 			this.thread = new Thread(new Runnable() {			
 				@Override
 				public void run() {
@@ -129,7 +127,7 @@ public final class EyeTracker extends AbstractTracker {
 						TobiiSDKLibrary.tobiigaze_run_event_loop(tracker, error);
 						
 						// Check if there was an exception we should report
-						final APIException exception = configuration.exception(error.getInt());
+						final APIException exception = exception(error.getInt());
 						if(exception != null) {
 							synchronized (listener) {
 								for (GazeListener l : listener) {
@@ -150,13 +148,14 @@ public final class EyeTracker extends AbstractTracker {
 			// Only register key provider if we have set a key.
 			if (this.key != null) {
 				this.keycallback = new KeyProviderCallback();
-				TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error);
-				configuration.except(error.getInt()); 				
+				TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error, url);
+				exception(error.getInt()); 				
 			}
 									
 			// Actually connect to the device
-			TobiiSDKLibrary.tobiigaze_connect(tracker, error);
-			configuration.except(error.getInt());			
+			
+			TobiiSDKLibrary.tobiigaze_connect(tracker, error);			
+			exception(error.getInt()); 				
 		} finally {
 			url.release();
 			error.release();	
@@ -177,10 +176,7 @@ public final class EyeTracker extends AbstractTracker {
 				
 		try {
 			TobiiSDKLibrary.tobiigaze_start_tracking(this.tracker, (Pointer<TobiiSDKLibrary.tobiigaze_gaze_listener>) callback.toPointer(), error, null);
-
-			configuration.except(error.getInt()); 
-		} catch (APIException e) {
-			this.callback = null;			
+			exception(error.getInt()); 				
 		} finally {
 			error.release();			
 		}
@@ -198,8 +194,7 @@ public final class EyeTracker extends AbstractTracker {
 				
 		try {
 			TobiiSDKLibrary.tobiigaze_stop_tracking(this.tracker, error);
-
-			configuration.except(error.getInt()); 
+			exception(error.getInt()); 				
 		} finally {
 			error.release();			
 		}

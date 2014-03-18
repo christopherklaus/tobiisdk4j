@@ -11,29 +11,15 @@ public class LiveTest {
 
 	@Test
 	public void testConnect() throws APIException {
-		final Configuration config = new Configuration();
-		final EyeTracker tracker = new EyeTracker(config);
-		
+		final EyeTracker tracker = new EyeTracker(null);		
 		tracker.connect();
 	}
 
-	@Test
-	public void testDeviceAddress() throws APIException {
-		final Configuration config = new Configuration();
-		assertNotNull(config.defaultTrackerURL());
-		assertTrue(config.defaultTrackerURL().contains("tet-tcp://"));
-	}
 	
-	@Test
-	public void testControlPanel() throws APIException {
-		final Configuration config = new Configuration();
-		config.controlPanel();
-	}
 
 	@Test
 	public void testGazeData() throws APIException, InterruptedException {
-		final Configuration config = new Configuration();
-		final EyeTracker tracker = new EyeTracker(config);		
+		final EyeTracker tracker = new EyeTracker(null);		
 		final AtomicReference<GazeEvent> ref = new AtomicReference<>();
 		
 		final GazeListener listener = new GazeListener() {

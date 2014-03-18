@@ -1,7 +1,6 @@
 package tobii.lowlevel.sdk;
 import java.util.Collections;
 import java.util.Iterator;
-
 import org.bridj.BridJ;
 import org.bridj.CRuntime;
 import org.bridj.Callback;
@@ -19,7 +18,7 @@ import org.bridj.ann.Runtime;
  * a tool written by <a href="http://ochafik.com/">Olivier Chafik</a> that <a href="http://code.google.com/p/jnaerator/wiki/CreditsAndLicense">uses a few opensource projects.</a>.<br>
  * For help, please visit <a href="http://nativelibs4java.googlecode.com/">NativeLibs4Java</a> or <a href="http://bridj.googlecode.com/">BridJ</a> .
  */
-@Library("TobiiGazeCore") 
+@Library("TobiiGazeCore64") 
 @Runtime(CRuntime.class) 
 public class TobiiSDKLibrary {
 	static {
@@ -27,101 +26,7 @@ public class TobiiSDKLibrary {
 	}
 	/**
 	 * enum values<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_error_codes.h:62</i>
-	 */
-	public enum tobiigaze_error_code implements IntValuedEnum<tobiigaze_error_code > {
-		/**
-		 * success<br>
-		 * This is not an error.
-		 */
-		TOBIIGAZE_ERROR_SUCCESS(0),
-		/**
-		 * generic errors<br>
-		 * Unknown error.
-		 */
-		TOBIIGAZE_ERROR_UNKNOWN(1),
-		/// Out of memory.
-		TOBIIGAZE_ERROR_OUT_OF_MEMORY(2),
-		/// A client allocated buffer was too small
-		TOBIIGAZE_ERROR_BUFFER_TOO_SMALL(3),
-		/**
-		 * sync function errors<br>
-		 * The operation has timed out.
-		 */
-		TOBIIGAZE_ERROR_TIMEOUT(100),
-		/// The operation has been aborted.
-		TOBIIGAZE_ERROR_OPERATION_ABORTED(101),
-		/**
-		 * transport errors<br>
-		 * An invalid or badly formated url was supplied.
-		 */
-		TOBIIGAZE_ERROR_INVALID_URL(200),
-		/// The name lookup failed for the supplied url.
-		TOBIIGAZE_ERROR_ENDPOINT_NAME_LOOKUP_FAILED(201),
-		/// Failed to connect to the specified url.
-		TOBIIGAZE_ERROR_ENDPOINT_CONNECT_FAILED(202),
-		/// A read or write call has failed.
-		TOBIIGAZE_ERROR_DEVICE_COMMUNICATION_ERROR(203),
-		/**
-		 * protocol errors<br>
-		 * Something has gone wrong in the decoding of the data from the Eye Tracker. This error is most likely unrecoverable.
-		 */
-		TOBIIGAZE_ERROR_PROTOCOL_DECODING_ERROR(300),
-		/**
-		 * config errors<br>
-		 * Tobii Gaze Config has not been initialized.
-		 */
-		TOBIIGAZE_CONFIG_NOT_INITIALIZED(400),
-		/// Tobii Eye Tracking isn't installed.
-		TOBIIGAZE_CONFIG_TOBII_EYE_TRACKING_NOT_AVAILABLE(401),
-		/// The installed version of Tobii Eye Tracking isn't compatible with this library.
-		TOBIIGAZE_CONFIG_TOBII_EYE_TRACKING_INCOMPATIBLE(402),
-		/// The system eye tracking configuration is incomplete.
-		TOBIIGAZE_CONFIG_INCOMPLETE(403),
-		/// The system eye tracking configuration is invalid.
-		TOBIIGAZE_CONFIG_INVALID(404),
-		/**
-		 * errors from eyetracker firmware<br>
-		 * The specific opcode or request is unknown. This means that the eye tracker doesn\u2019t understand what it is supposed to do with this request.
-		 */
-		TOBIIGAZE_FW_ERROR_UNKNOWN_OPERATION(0x20000500),
-		/// The eye tracker understands the opcode or request, but does not support it.
-		TOBIIGAZE_FW_ERROR_UNSUPPORTED_OPERATION(0x20000501),
-		/// The request failed. This can mean different things for different requests.
-		TOBIIGAZE_FW_ERROR_OPERATION_FAILED(0x20000502),
-		/// The request contained invalid data. This is a severe error and indicates some kind of network problem.
-		TOBIIGAZE_FW_ERROR_INVALID_PAYLOAD(0x20000503),
-		/// The opcode referenced an unknown ID. This is probably caused by a programming error.
-		TOBIIGAZE_FW_ERROR_UNKNOWN_ID(0x20000504),
-		/// The operation cannot be completed without further authorization. (The Authorization has failed).
-		TOBIIGAZE_FW_ERROR_UNAUTHORIZED(0x20000505),
-		/// The operation requires enabling an extension.
-		TOBIIGAZE_FW_ERROR_EXTENSION_REQUIRED(0x20000506),
-		/// A generic error that indicates a bug in the firmware.
-		TOBIIGAZE_FW_ERROR_INTERNAL_ERROR(0x20000507),
-		/// The server or client is in a state where this request is unsupported or not allowed.
-		TOBIIGAZE_FW_ERROR_STATE_ERROR(0x20000508),
-		/// One or more parameters in the request were incorrect.
-		TOBIIGAZE_FW_ERROR_INVALID_PARAMETER(0x20000509),
-		/// The request was aborted before it could complete. This indicates that the network connection to the eye tracker was lost.
-		TOBIIGAZE_FW_ERROR_OPERATION_ABORTED(0x2000050A);
-		tobiigaze_error_code(long value) {
-			this.value = value;
-		}
-		public final long value;
-		public long value() {
-			return this.value;
-		}
-		public Iterator<tobiigaze_error_code > iterator() {
-			return Collections.singleton(this).iterator();
-		}
-		public static IntValuedEnum<tobiigaze_error_code > fromValue(int value) {
-			return FlagSet.fromValue(value, values());
-		}
-	};
-	/**
-	 * enum values<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_data_types.h:71</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_data_types.h:148</i>
 	 */
 	public enum tobiigaze_log_level implements IntValuedEnum<tobiigaze_log_level > {
 		TOBIIGAZE_LOG_LEVEL_OFF(0),
@@ -145,7 +50,7 @@ public class TobiiSDKLibrary {
 	};
 	/**
 	 * enum values<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_data_types.h:83</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_data_types.h:172</i>
 	 */
 	public enum tobiigaze_constants implements IntValuedEnum<tobiigaze_constants > {
 		TOBIIGAZE_DEVICE_INFO_MAX_SERIAL_NUMBER_LENGTH(128),
@@ -154,9 +59,21 @@ public class TobiiSDKLibrary {
 		TOBIIGAZE_DEVICE_INFO_MAX_FIRMWARE_LENGTH(128),
 		TOBIIGAZE_CALIBRATION_DATA_CAPACITY(4 * 1024 * 1024),
 		TOBIIGAZE_KEY_SIZE(32),
+		TOBIIGAZE_MAX_CALIBRATION_POINT_DATA_ITEMS(512),
 		TOBII_USB_DEVICE_INFO_MAX_SIZE(128),
 		TOBII_USB_DEVICE_ADDRESS_MAX_SIZE(138),
-		TOBII_USB_MAX_DEVICES(9);
+		TOBII_USB_MAX_DEVICES(9),
+		TOBIIGAZE_FRAMERATES_MAX_SIZE(32),
+		TOBIIGAZE_ILLUMINATION_MODE_STRING_MAX_SIZE(64),
+		TOBIIGAZE_ILLUMINATION_MODES_MAX_SIZE(16),
+		TOBIIGAZE_UNIT_NAME_MAX_SIZE(64),
+		TOBIIGAZE_EXTENSION_NAME_MAX_SIZE(16),
+		TOBIIGAZE_EXTENSIONS_MAX_SIZE(16),
+		TOBIIGAZE_MAX_WAKE_ON_GAZE_REGIONS(4),
+		TOBIIGAZE_AUTHORIZE_CHALLENGE_MAX_LEN(512),
+		TOBIIGAZE_MAX_GAZE_DATA_EXTENSIONS(32),
+		TOBIIGAZE_MAX_GAZE_DATA_EXTENSION_LENGTH(256),
+		TOBIIGAZE_MAX_CONFIG_KEY_LENGTH(128);
 		tobiigaze_constants(long value) {
 			this.value = value;
 		}
@@ -173,7 +90,7 @@ public class TobiiSDKLibrary {
 	};
 	/**
 	 * enum values<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_data_types.h:93</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_data_types.h:182</i>
 	 */
 	public enum tobiigaze_tracking_status implements IntValuedEnum<tobiigaze_tracking_status > {
 		TOBIIGAZE_TRACKING_STATUS_NO_EYES_TRACKED(0),
@@ -198,198 +115,383 @@ public class TobiiSDKLibrary {
 		}
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_add_gaze_data_listener. The callback function will be called when gaze <br>
-	 * data is received from the eye tracker.<br>
-	 * @param gaze_data     The received Gaze Data.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:297</i>
+	 * enum values<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_data_types.h:188</i>
 	 */
-	/**
-	 * This type is used for the callback function that is registered with tobiigaze_add_gaze_data_listener. The callback function will be called when gaze <br>
-	 * data is received from the eye tracker.<br>
-	 * @param gaze_data     The received Gaze Data.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:297</i>
-	 */
-	public static abstract class tobiigaze_gaze_listener extends Callback<tobiigaze_gaze_listener > {
-		abstract public void apply(Pointer<tobiigaze_gaze_data > gaze_data, Pointer<? > user_data);
+	public enum tobiigaze_calibration_point_status implements IntValuedEnum<tobiigaze_calibration_point_status > {
+		TOBIIGAZE_CALIBRATION_POINT_STATUS_FAILED_OR_INVALID(-1),
+		TOBIIGAZE_CALIBRATION_POINT_STATUS_VALID_BUT_NOT_USED_IN_CALIBRATION(0),
+		TOBIIGAZE_CALIBRATION_POINT_STATUS_VALID_AND_USED_IN_CALIBRATION(1);
+		tobiigaze_calibration_point_status(long value) {
+			this.value = value;
+		}
+		public final long value;
+		public long value() {
+			return this.value;
+		}
+		public Iterator<tobiigaze_calibration_point_status > iterator() {
+			return Collections.singleton(this).iterator();
+		}
+		public static IntValuedEnum<tobiigaze_calibration_point_status > fromValue(int value) {
+			return FlagSet.fromValue(value, values());
+		}
 	};
 	/**
-	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data. <br>
-	 * The callback function will be called when the command is completed.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:304</i>
+	 * enum values<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_data_types.h:195</i>
+	 */
+	public enum tobiigaze_option implements IntValuedEnum<tobiigaze_option > {
+		TOBIIGAZE_OPTION_TIMEOUT(0);
+		tobiigaze_option(long value) {
+			this.value = value;
+		}
+		public final long value;
+		public long value() {
+			return this.value;
+		}
+		public Iterator<tobiigaze_option > iterator() {
+			return Collections.singleton(this).iterator();
+		}
+		public static IntValuedEnum<tobiigaze_option > fromValue(int value) {
+			return FlagSet.fromValue(value, values());
+		}
+	};
+	/**
+	 * enum values<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_error_codes.h:589</i>
+	 */
+	public enum tobiigaze_error_code implements IntValuedEnum<tobiigaze_error_code > {
+		/// Success
+		TOBIIGAZE_ERROR_SUCCESS(0),
+		/// Generic errors
+		TOBIIGAZE_ERROR_UNKNOWN(1),
+		TOBIIGAZE_ERROR_OUT_OF_MEMORY(2),
+		TOBIIGAZE_ERROR_BUFFER_TOO_SMALL(3),
+		TOBIIGAZE_ERROR_INVALID_PARAMETER(4),
+		/// Sync function errors
+		TOBIIGAZE_ERROR_TIMEOUT(100),
+		TOBIIGAZE_ERROR_OPERATION_ABORTED(101),
+		/// Transport errors
+		TOBIIGAZE_ERROR_INVALID_URL(200),
+		TOBIIGAZE_ERROR_ENDPOINT_NAME_LOOKUP_FAILED(201),
+		TOBIIGAZE_ERROR_ENDPOINT_CONNECT_FAILED(202),
+		TOBIIGAZE_ERROR_DEVICE_COMMUNICATION_ERROR(203),
+		TOBIIGAZE_ERROR_ALREADY_CONNECTED(204),
+		TOBIIGAZE_ERROR_NOT_CONNECTED(205),
+		/// Protocol errors
+		TOBIIGAZE_ERROR_PROTOCOL_DECODING_ERROR(300),
+		TOBIIGAZE_ERROR_PROTOCOL_VERSION_ERROR(301),
+		/// Errors from eye tracker firmware
+		TOBIIGAZE_FW_ERROR_UNKNOWN_OPERATION(0x20000500),
+		TOBIIGAZE_FW_ERROR_UNSUPPORTED_OPERATION(0x20000501),
+		TOBIIGAZE_FW_ERROR_OPERATION_FAILED(0x20000502),
+		TOBIIGAZE_FW_ERROR_INVALID_PAYLOAD(0x20000503),
+		TOBIIGAZE_FW_ERROR_UNKNOWN_ID(0x20000504),
+		TOBIIGAZE_FW_ERROR_UNAUTHORIZED(0x20000505),
+		TOBIIGAZE_FW_ERROR_EXTENSION_REQUIRED(0x20000506),
+		TOBIIGAZE_FW_ERROR_INTERNAL_ERROR(0x20000507),
+		TOBIIGAZE_FW_ERROR_STATE_ERROR(0x20000508),
+		TOBIIGAZE_FW_ERROR_INVALID_PARAMETER(0x20000509),
+		TOBIIGAZE_FW_ERROR_OPERATION_ABORTED(0x2000050A);
+		tobiigaze_error_code(long value) {
+			this.value = value;
+		}
+		public final long value;
+		public long value() {
+			return this.value;
+		}
+		public Iterator<tobiigaze_error_code > iterator() {
+			return Collections.singleton(this).iterator();
+		}
+		public static IntValuedEnum<tobiigaze_error_code > fromValue(int value) {
+			return FlagSet.fromValue(value, values());
+		}
+	};
+	/**
+	 * This type is used for the callback function that is registered with tobiigaze_add_gaze_data_listener. The callback function will be called when gaze<br>
+	 * data is received from the eye tracker.<br>
+	 * @param gaze_data             The received Gaze Data.<br>
+	 * @param gaze_data_extensions  Contains optional extension data. Does not contain any data on standard eye trackers.<br>
+	 * @param user_data             Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:598</i>
 	 */
 	/**
-	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data. <br>
-	 * The callback function will be called when the command is completed.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:304</i>
+	 * This type is used for the callback function that is registered with tobiigaze_add_gaze_data_listener. The callback function will be called when gaze<br>
+	 * data is received from the eye tracker.<br>
+	 * @param gaze_data             The received Gaze Data.<br>
+	 * @param gaze_data_extensions  Contains optional extension data. Does not contain any data on standard eye trackers.<br>
+	 * @param user_data             Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:598</i>
+	 */
+	public static abstract class tobiigaze_gaze_listener extends Callback<tobiigaze_gaze_listener > {
+		abstract public void apply(Pointer<tobiigaze_gaze_data > gaze_data, Pointer<tobiigaze_gaze_data_extensions > gaze_data_extensions, Pointer<? > user_data);
+	};
+	/**
+	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data.<br>
+	 * The callback function will be called when the command is completed.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:605</i>
+	 */
+	/**
+	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data.<br>
+	 * The callback function will be called when the command is completed.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:605</i>
 	 */
 	public static abstract class tobiigaze_async_callback extends Callback<tobiigaze_async_callback > {
 		abstract public void apply(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data or an error code. <br>
-	 * The callback function will be called when the command is completed.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:310</i>
+	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data or an error code.<br>
+	 * The callback function will be called when the command is completed.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:611</i>
 	 */
 	/**
-	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data or an error code. <br>
-	 * The callback function will be called when the command is completed.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:310</i>
+	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data or an error code.<br>
+	 * The callback function will be called when the command is completed.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:611</i>
 	 */
 	public static abstract class tobiigaze_async_basic_callback extends Callback<tobiigaze_async_basic_callback > {
 		abstract public void apply(Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_display_area_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param display_area  The retrieved Display Area.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:318</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_display_area_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param display_area  The retrieved Display Area.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:619</i>
 	 */
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_display_area_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param display_area  The retrieved Display Area.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:318</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_display_area_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param display_area  The retrieved Display Area.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:619</i>
 	 */
 	public static abstract class tobiigaze_async_display_area_callback extends Callback<tobiigaze_async_display_area_callback > {
 		abstract public void apply(Pointer<tobiigaze_display_area > display_area, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_device_info_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param device_info   The retrieved Device Info.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:326</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_device_info_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param device_info   The retrieved device info.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:627</i>
 	 */
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_device_info_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param device_info   The retrieved Device Info.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:326</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_device_info_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param device_info   The retrieved device info.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:627</i>
 	 */
 	public static abstract class tobiigaze_async_device_info_callback extends Callback<tobiigaze_async_device_info_callback > {
 		abstract public void apply(Pointer<tobiigaze_device_info > device_info, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_track_box_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param track_box     The retrieved Track Box.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:334</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_track_box_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param track_box     The retrieved Track Box.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:635</i>
 	 */
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_track_box_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param track_box     The retrieved Track Box.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:334</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_track_box_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param track_box     The retrieved Track Box.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:635</i>
 	 */
 	public static abstract class tobiigaze_async_trackbox_callback extends Callback<tobiigaze_async_trackbox_callback > {
 		abstract public void apply(Pointer<tobiigaze_track_box > track_box, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_calibration_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param calibration   The retrieved Calibration.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:342</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_geometry_mounting_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param geometry_mounting     The retrieved geometry mounting.<br>
+	 * @param error_code            Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data             Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:643</i>
 	 */
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_get_calibration_async. The callback function will be called <br>
-	 * when the command is completed.<br>
-	 * @param calibration   The retrieved Calibration.<br>
-	 * @param error_code    Will contain an error code or 0 if no error occurred.<br>
-	 * @param user_data     Optional user data that is supplied by the user and is passed unmodified to the callback function. Can be NULL.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:342</i>
+	 * This type is used for the callback function that is registered with tobiigaze_get_geometry_mounting_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param geometry_mounting     The retrieved geometry mounting.<br>
+	 * @param error_code            Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data             Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:643</i>
+	 */
+	public static abstract class tobiigaze_async_geometry_mounting_callback extends Callback<tobiigaze_async_geometry_mounting_callback > {
+		abstract public void apply(Pointer<tobiigaze_geometry_mounting > geometry_mounting, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/**
+	 * This type is used for the callback function that is registered with tobiigaze_get_calibration_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param calibration   The retrieved Calibration.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:651</i>
+	 */
+	/**
+	 * This type is used for the callback function that is registered with tobiigaze_get_calibration_async. The callback function will be called<br>
+	 * when the command is completed.<br>
+	 * @param calibration   The retrieved Calibration.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:651</i>
 	 */
 	public static abstract class tobiigaze_async_calibration_callback extends Callback<tobiigaze_async_calibration_callback > {
 		abstract public void apply(Pointer<tobiigaze_calibration > calibration, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
 	};
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_register_key_provider. The callback function will be called <br>
-	 * when a eye tracker is to be unlocked.<br>
-	 * @param realm_id      The realm of the eye tracker to provide the key for.<br>
-	 * @param key           The key to use for unlocking the eye tracker.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:349</i>
+	 * This type is used for the callback function that is registered with tobiigaze_register_key_provider. The callback function will be called<br>
+	 * when an eye tracker is to be unlocked.<br>
+	 * @param realm_id      The realm of the eye tracker to provide the key for.<br>
+	 * @param key           The key to use for unlocking the eye tracker.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:659</i>
 	 */
 	/**
-	 * This type is used for the callback function that is registered with tobiigaze_register_key_provider. The callback function will be called <br>
-	 * when a eye tracker is to be unlocked.<br>
-	 * @param realm_id      The realm of the eye tracker to provide the key for.<br>
-	 * @param key           The key to use for unlocking the eye tracker.<br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze_callback_types.h:349</i>
+	 * This type is used for the callback function that is registered with tobiigaze_register_key_provider. The callback function will be called<br>
+	 * when an eye tracker is to be unlocked.<br>
+	 * @param realm_id      The realm of the eye tracker to provide the key for.<br>
+	 * @param key           The key to use for unlocking the eye tracker.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:659</i>
 	 */
 	public static abstract class tobiigaze_key_provider_callback extends Callback<tobiigaze_key_provider_callback > {
-		abstract public void apply(int realm_id, Pointer<tobiigaze_key > key);
+		abstract public void apply(int realm_id, Pointer<tobiigaze_key > key, Pointer<? > user_data);
 	};
 	/**
-	 * Original signature : <code>void tobiigaze_list_usb_eye_trackers(usb_device_info*, uint32_t, uint32_t*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:353</i>
+	 * This type is used for the callback function that is registered with tobiigaze_send_custom_command_async. The callback function will be called<br>
+	 * when an eye tracker is to be unlocked.<br>
+	 * @param command       The response command from the eye tracker.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:667</i>
 	 */
-	public static void tobiigaze_list_usb_eye_trackers(Pointer<usb_device_info > device_infos, int device_infos_cap, Pointer<Integer > device_infos_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_list_usb_eye_trackers(Pointer.getPeer(device_infos), device_infos_cap, Pointer.getPeer(device_infos_size), Pointer.getPeer(error_code));
-	}
-	protected native static void tobiigaze_list_usb_eye_trackers(@Ptr long device_infos, int device_infos_cap, @Ptr long device_infos_size, @Ptr long error_code);
 	/**
-	 * Creates an eye tracker instance.<br>
-	 * @param url           An url identifying the eye tracker. Currently only the tet-tcp protocol is defined. Example: "tet-tcp://172.68.195.1".     <br>
-	 * @return              An eye tracker instance, or NULL if creation failed.<br>
-	 * Original signature : <code>tobiigaze_eye_tracker* tobiigaze_create(const char*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:360</i>
+	 * This type is used for the callback function that is registered with tobiigaze_send_custom_command_async. The callback function will be called<br>
+	 * when an eye tracker is to be unlocked.<br>
+	 * @param command       The response command from the eye tracker.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:667</i>
 	 */
-	public static Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > tobiigaze_create(Pointer<Byte > url) {
-		return Pointer.pointerToAddress(tobiigaze_create(Pointer.getPeer(url)), TobiiSDKLibrary.tobiigaze_eye_tracker.class);
+	public static abstract class tobiigaze_async_custom_command_callback extends Callback<tobiigaze_async_custom_command_callback > {
+		abstract public void apply(Pointer<tobiigaze_custom_command > command, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:668</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:668</i>
+	public static abstract class tobiigaze_async_framerates_callback extends Callback<tobiigaze_async_framerates_callback > {
+		abstract public void apply(Pointer<tobiigaze_framerates > frame_rates, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:669</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:669</i>
+	public static abstract class tobiigaze_async_framerate_callback extends Callback<tobiigaze_async_framerate_callback > {
+		abstract public void apply(Pointer<Float > frame_rate, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:670</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:670</i>
+	public static abstract class tobiigaze_async_illuminations_callback extends Callback<tobiigaze_async_illuminations_callback > {
+		abstract public void apply(Pointer<tobiigaze_illumination_modes > modes, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:671</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:671</i>
+	public static abstract class tobiigaze_async_illumination_callback extends Callback<tobiigaze_async_illumination_callback > {
+		abstract public void apply(Pointer<tobiigaze_illumination_mode > mode, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:672</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:672</i>
+	public static abstract class tobiigaze_async_diagonstics_report_callback extends Callback<tobiigaze_async_diagonstics_report_callback > {
+		abstract public void apply(Pointer<tobiigaze_blob > blob, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:673</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:673</i>
+	public static abstract class tobiigaze_async_low_blink_mode_callback extends Callback<tobiigaze_async_low_blink_mode_callback > {
+		abstract public void apply(Pointer<Integer > low_blink, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:674</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:674</i>
+	public static abstract class tobiigaze_async_unit_name_callback extends Callback<tobiigaze_async_unit_name_callback > {
+		abstract public void apply(Pointer<tobiigaze_unit_name > unit_name, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:675</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:675</i>
+	public static abstract class tobiigaze_async_extensions_callback extends Callback<tobiigaze_async_extensions_callback > {
+		abstract public void apply(Pointer<tobiigaze_extensions > extensions, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:676</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:676</i>
+	public static abstract class tobiigaze_async_config_key_value_callback extends Callback<tobiigaze_async_config_key_value_callback > {
+		abstract public void apply(Pointer<tobiigaze_config_key_value > config_key_value, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:677</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:677</i>
+	public static abstract class tobiigaze_async_timesync_receive_packet_callback extends Callback<tobiigaze_async_timesync_receive_packet_callback > {
+		abstract public void apply(Pointer<tobiigaze_timesync_info > packet, Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:678</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:678</i>
+	public static abstract class tobiigaze_async_timesync_send_packet_callback extends Callback<tobiigaze_async_timesync_send_packet_callback > {
+		abstract public void apply(Pointer<? > user_data);
+	};
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:679</i>
+	/// <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:679</i>
+	public static abstract class tobiigaze_async_xconfig_writable_callback extends Callback<tobiigaze_async_xconfig_writable_callback > {
+		abstract public void apply(Pointer<Integer > xconfig_writable, IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+	};
+	/**
+	 * Creates an eye tracker instance.<br>
+	 * @param url           An url identifying the eye tracker. Currently only the tet-tcp protocol is defined. Example: "tet-tcp://172.68.195.1".<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @return              An eye tracker instance, or NULL if creation failed.<br>
+	 * Original signature : <code>tobiigaze_eye_tracker* tobiigaze_create(const char*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:689</i>
+	 */
+	public static Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > tobiigaze_create(Pointer<Byte > url, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		return Pointer.pointerToAddress(tobiigaze_create(Pointer.getPeer(url), Pointer.getPeer(error_code)), TobiiSDKLibrary.tobiigaze_eye_tracker.class);
 	}
 	@Ptr 
-	protected native static long tobiigaze_create(@Ptr long url);
+	protected native static long tobiigaze_create(@Ptr long url, @Ptr long error_code);
 	/**
-	 * Destroys an eye tracker instance.<br>
+	 * Destroys an eye tracker instance. Must NOT be called from a callback.<br>
 	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_destroy(tobiigaze_eye_tracker*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:367</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:695</i>
 	 */
 	public static void tobiigaze_destroy(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker) {
 		tobiigaze_destroy(Pointer.getPeer(eye_tracker));
 	}
 	protected native static void tobiigaze_destroy(@Ptr long eye_tracker);
 	/**
-	 * Registers a callback that will return an error code when a spontaneous error occurs (an error not directly associated with a command). Most likely <br>
-	 * this error is related to problems with the eye tracker communication and is unrecoverable. <br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      The callback function.<br>
+	 * Registers a callback that will return an error code when a spontaneous error occurs (an error not directly associated with a command). Most likely<br>
+	 * this error is related to problems with the eye tracker communication and is unrecoverable.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called when an error occurs. Set to NULL to unregister a previously registered callback.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_register_error_callback(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:376</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:704</i>
 	 */
 	public static void tobiigaze_register_error_callback(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
 		tobiigaze_register_error_callback(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_register_error_callback(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Gets the version of the library.<br>
+	 * Gets the version of the library.<br>
 	 * @return   The version of the library on the form "1.0.2".<br>
 	 * Original signature : <code>char* tobiigaze_get_version()</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:382</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:710</i>
 	 */
 	public static Pointer<Byte > tobiigaze_get_version() {
 		return Pointer.pointerToAddress(tobiigaze_get_version$2(), Byte.class);
@@ -398,204 +500,559 @@ public class TobiiSDKLibrary {
 	@Name("tobiigaze_get_version") 
 	protected native static long tobiigaze_get_version$2();
 	/**
-	 * Sets the logging output filename and verbosity.<br>
-	 * @param filename              The filename of the logfile.<br>
-	 * @param tobiigaze_log_level   The verbosity of the logging.<br>
-	 * @return                      TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise an error code.<br>
+	 * Sets the logging output filename and verbosity.<br>
+	 * @param filename              The filename of the logfile.<br>
+	 * @param log_level             The verbosity of the logging.<br>
+	 * @param error_code            Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_set_logging(const char*, tobiigaze_log_level, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:390</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:718</i>
 	 */
-	public static void tobiigaze_set_logging(Pointer<Byte > filename, IntValuedEnum<TobiiSDKLibrary.tobiigaze_log_level > level, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_set_logging(Pointer.getPeer(filename), (int)level.value(), Pointer.getPeer(error_code));
+	public static void tobiigaze_set_logging(Pointer<Byte > filename, IntValuedEnum<TobiiSDKLibrary.tobiigaze_log_level > log_level, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_set_logging(Pointer.getPeer(filename), (int)log_level.value(), Pointer.getPeer(error_code));
 	}
-	protected native static void tobiigaze_set_logging(@Ptr long filename, int level, @Ptr long error_code);
+	protected native static void tobiigaze_set_logging(@Ptr long filename, int log_level, @Ptr long error_code);
 	/**
-	 * Connects to an eye tracker asynchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion.<br>
+	 * Connects to an eye tracker asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_connect_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:398</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:726</i>
 	 */
 	public static void tobiigaze_connect_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
 		tobiigaze_connect_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_connect_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Connects to an eye tracker synchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
+	 * Connects to an eye tracker synchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_connect(tobiigaze_eye_tracker*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:405</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:733</i>
 	 */
 	public static void tobiigaze_connect(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
 		tobiigaze_connect(Pointer.getPeer(eye_tracker), Pointer.getPeer(error_code));
 	}
 	protected native static void tobiigaze_connect(@Ptr long eye_tracker, @Ptr long error_code);
 	/**
-	 * Disonnects from an eye tracker asynchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion.<br>
+	 * Disonnects from an eye tracker asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_disconnect_async(tobiigaze_eye_tracker*, tobiigaze_async_basic_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:413</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:741</i>
 	 */
 	public static void tobiigaze_disconnect_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_basic_callback > callback, Pointer<? > user_data) {
 		tobiigaze_disconnect_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_disconnect_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Disconnects from an eye tracker synchronously.<br>
+	 * Disconnects from an eye tracker synchronously.<br>
 	 * @param eye_tracker   An eye tracker instance.<br>
 	 * Original signature : <code>void tobiigaze_disconnect(tobiigaze_eye_tracker*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:419</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:747</i>
 	 */
 	public static void tobiigaze_disconnect(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker) {
 		tobiigaze_disconnect(Pointer.getPeer(eye_tracker));
 	}
 	protected native static void tobiigaze_disconnect(@Ptr long eye_tracker);
 	/**
-	 * Runs the event loop. This is a blocking call and must be called on a dedicated thread.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
+	 * Runs the event loop. This is a blocking call and must be called on a dedicated thread.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_run_event_loop(tobiigaze_eye_tracker*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:426</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:754</i>
 	 */
 	public static void tobiigaze_run_event_loop(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
 		tobiigaze_run_event_loop(Pointer.getPeer(eye_tracker), Pointer.getPeer(error_code));
 	}
 	protected native static void tobiigaze_run_event_loop(@Ptr long eye_tracker, @Ptr long error_code);
 	/**
-	 * Breaks the event loop. This will make the blocking tobiigaze_run_event_loop call return.<br>
+	 * Runs the event loop on asynchronously. That is, it creates a thread internally on which the event loops run.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called when the run loop exits. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_run_event_loop_on_internal_thread(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:762</i>
+	 */
+	public static void tobiigaze_run_event_loop_on_internal_thread(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_run_event_loop_on_internal_thread(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_run_event_loop_on_internal_thread(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Breaks the event loop. This will make the blocking tobiigaze_run_event_loop call return. Must NOT be called from a callback. Any outstanding work is<br>
+	 * cancelled. If run_event_loop was used to start the loop, it is up to the client to synchronize the thread with join(). If run_event_loop_async was<br>
+	 * used, the thread is joined in this call. After this function has been called, it is not possible to start a new event loop on the same eye tracker instance.<br>
 	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_break_event_loop(tobiigaze_eye_tracker*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:433</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:770</i>
 	 */
 	public static void tobiigaze_break_event_loop(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker) {
 		tobiigaze_break_event_loop(Pointer.getPeer(eye_tracker));
 	}
 	protected native static void tobiigaze_break_event_loop(@Ptr long eye_tracker);
 	/**
-	 * Starts gaze tracking asynchronously. <br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion (note that this is not the callback that will handle the actual gaze data).<br>
-	 * @param gaze_callback A callback function that will be called asynchronously when gaze data is available.<br>
-	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Starts gaze tracking asynchronously.<br>
+	 * @param eye_tracker     An eye tracker instance.<br>
+	 * @param callback        A callback function that will be called on command completion (note that this is not the callback that will provide the actual gaze data).<br>
+	 * @param gaze_callback   A callback function that will be called asynchronously when gaze data is available.<br>
+	 * @param user_data       Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_start_tracking_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, tobiigaze_gaze_listener, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:442</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:779</i>
 	 */
 	public static void tobiigaze_start_tracking_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<TobiiSDKLibrary.tobiigaze_gaze_listener > gaze_callback, Pointer<? > user_data) {
 		tobiigaze_start_tracking_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(gaze_callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_start_tracking_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long gaze_callback, @Ptr long user_data);
 	/**
-	 * Starts gaze tracking synchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param gaze_callback A callback function that will be called asynchronously when gaze data is available.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.      * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Starts gaze tracking synchronously.<br>
+	 * @param eye_tracker    An eye tracker instance.<br>
+	 * @param gaze_callback  A callback function that will be called asynchronously when gaze data is available.<br>
+	 * @param error_code     Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data      Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_start_tracking(tobiigaze_eye_tracker*, tobiigaze_gaze_listener, tobiigaze_error_code*, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:450</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:788</i>
 	 */
 	public static void tobiigaze_start_tracking(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_gaze_listener > gaze_callback, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code, Pointer<? > user_data) {
 		tobiigaze_start_tracking(Pointer.getPeer(eye_tracker), Pointer.getPeer(gaze_callback), Pointer.getPeer(error_code), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_start_tracking(@Ptr long eye_tracker, @Ptr long gaze_callback, @Ptr long error_code, @Ptr long user_data);
 	/**
-	 * Stops gaze tracking asynchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion.<br>
+	 * Stops gaze tracking asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_stop_tracking_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:458</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:796</i>
 	 */
 	public static void tobiigaze_stop_tracking_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
 		tobiigaze_stop_tracking_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_stop_tracking_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Stops gaze tracking synchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
+	 * Stops gaze tracking synchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_stop_tracking(tobiigaze_eye_tracker*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:465</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:803</i>
 	 */
 	public static void tobiigaze_stop_tracking(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
 		tobiigaze_stop_tracking(Pointer.getPeer(eye_tracker), Pointer.getPeer(error_code));
 	}
 	protected native static void tobiigaze_stop_tracking(@Ptr long eye_tracker, @Ptr long error_code);
 	/**
-	 * Gets the device info, such as platform, versions etc, asynchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion.<br>
+	 * Gets the device info, such as platform, versions etc, asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_get_device_info_async(tobiigaze_eye_tracker*, tobiigaze_async_device_info_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:473</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:811</i>
 	 */
 	public static void tobiigaze_get_device_info_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_device_info_callback > callback, Pointer<? > user_data) {
 		tobiigaze_get_device_info_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_get_device_info_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Gets the device info, such as platform, versions etc, synchronously.<br>
-	 * @param eye_tracker   An eye tracker instance. <br>
-	 * @param device_info   Device information out parameter.<br>
-	 * @param error_code            Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
+	 * Gets the device info, such as platform, versions etc, synchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param device_info   Device information out parameter.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_get_device_info(tobiigaze_eye_tracker*, tobiigaze_device_info*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:481</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:819</i>
 	 */
 	public static void tobiigaze_get_device_info(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_device_info > device_info, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
 		tobiigaze_get_device_info(Pointer.getPeer(eye_tracker), Pointer.getPeer(device_info), Pointer.getPeer(error_code));
 	}
 	protected native static void tobiigaze_get_device_info(@Ptr long eye_tracker, @Ptr long device_info, @Ptr long error_code);
 	/**
-	 * Gets the track box asynchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param callback      A callback function that will be called on command completion.<br>
+	 * Gets the track box asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
 	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_get_track_box_async(tobiigaze_eye_tracker*, tobiigaze_async_trackbox_callback, void*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:489</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:827</i>
 	 */
 	public static void tobiigaze_get_track_box_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_trackbox_callback > callback, Pointer<? > user_data) {
 		tobiigaze_get_track_box_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
 	protected native static void tobiigaze_get_track_box_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Gets the track box synchronously.<br>
-	 * @param eye_tracker   An eye tracker instance.<br>
-	 * @param track_box     Track box information out parameter.<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
+	 * Gets the track box synchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param track_box     Track box information out parameter.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
 	 * Original signature : <code>void tobiigaze_get_track_box(tobiigaze_eye_tracker*, tobiigaze_track_box*, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:497</i>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:835</i>
 	 */
 	public static void tobiigaze_get_track_box(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_track_box > track_box, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
 		tobiigaze_get_track_box(Pointer.getPeer(eye_tracker), Pointer.getPeer(track_box), Pointer.getPeer(error_code));
 	}
 	protected native static void tobiigaze_get_track_box(@Ptr long eye_tracker, @Ptr long track_box, @Ptr long error_code);
 	/**
-	 * Registers a callback providing a key for unlocking the eye tracker. The Tobii Gaze Core library unlocks developer edition <br>
-	 * eye trackers automatically; this function can be used to unlock other eye trackers. Registering a key provider disables the built-in default key.<br>
-	 * @param eye_tracker   An eye tracker instance	 <br>
-	 * @param callback      The callback function<br>
-	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was succesful, otherwise to an error code. Can be NULL.<br>
-	 * Original signature : <code>void tobiigaze_register_key_provider(tobiigaze_eye_tracker*, tobiigaze_key_provider_callback, tobiigaze_error_code*)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:506</i>
+	 * Gets the geometry mounting asynchronously.<br>
+	 * @param eye_tracker           An eye tracker instance.<br>
+	 * @param callback              A callback function that will be called on command completion.<br>
+	 * @param user_data             Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_geometry_mounting_async(tobiigaze_eye_tracker*, tobiigaze_async_geometry_mounting_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:843</i>
 	 */
-	public static void tobiigaze_register_key_provider(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback > callback, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
-		tobiigaze_register_key_provider(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(error_code));
+	public static void tobiigaze_get_geometry_mounting_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_geometry_mounting_callback > callback, Pointer<? > user_data) {
+		tobiigaze_get_geometry_mounting_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
 	}
-	protected native static void tobiigaze_register_key_provider(@Ptr long eye_tracker, @Ptr long callback, @Ptr long error_code);
+	protected native static void tobiigaze_get_geometry_mounting_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
 	/**
-	 * Returns the meaning of an error code.<br>
-	 * @param error_code    An error code.<br>
-	 * Original signature : <code>char* tobiigaze_convert_error_code_to_string(tobiigaze_error_code)</code><br>
-	 * <i>native declaration : tobii_gaze_sdk\include\tobiigaze.h:512</i>
+	 * Gets the geometry mounting.<br>
+	 * @param eye_tracker           An eye tracker instance.<br>
+	 * @param geometry_mounting     Geometry mounting out parameter.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_geometry_mounting(tobiigaze_eye_tracker*, tobiigaze_geometry_mounting*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:851</i>
 	 */
-/*	public static Pointer<Byte > tobiigaze_convert_error_code_to_string(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code) {
-		return Pointer.pointerToAddress(tobiigaze_convert_error_code_to_string((int)error_code.value()), Byte.class);
+	public static void tobiigaze_get_geometry_mounting(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_geometry_mounting > geometry_mounting, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_get_geometry_mounting(Pointer.getPeer(eye_tracker), Pointer.getPeer(geometry_mounting), Pointer.getPeer(error_code));
 	}
-*/	@Ptr 
-	/*protected native static long tobiigaze_convert_error_code_to_string(int error_code);*/
+	protected native static void tobiigaze_get_geometry_mounting(@Ptr long eye_tracker, @Ptr long geometry_mounting, @Ptr long error_code);
+	/**
+	 * Registers a callback providing a key for unlocking the eye tracker. The Tobii Gaze Core library unlocks developer edition<br>
+	 * eye trackers automatically; this function can be used to unlock other eye trackers. Registering a key provider disables the built-in default key.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function. Set to NULL to unregister a previously registered callback, that is, use the default key provider.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_register_key_provider(tobiigaze_eye_tracker*, tobiigaze_key_provider_callback, tobiigaze_error_code*, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:861</i>
+	 */
+	public static void tobiigaze_register_key_provider(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback > callback, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code, Pointer<? > user_data) {
+		tobiigaze_register_key_provider(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(error_code), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_register_key_provider(@Ptr long eye_tracker, @Ptr long callback, @Ptr long error_code, @Ptr long user_data);
+	/**
+	 * Gets the url associated with the eye tracker instance.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @return              A string containing the url.<br>
+	 * Original signature : <code>char* tobiigaze_get_url(tobiigaze_eye_tracker*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:869</i>
+	 */
+	public static Pointer<Byte > tobiigaze_get_url(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		return Pointer.pointerToAddress(tobiigaze_get_url(Pointer.getPeer(eye_tracker), Pointer.getPeer(error_code)), Byte.class);
+	}
+	@Ptr 
+	protected native static long tobiigaze_get_url(@Ptr long eye_tracker, @Ptr long error_code);
+	/**
+	 * Returns the connection status to the eye tracker.<br>
+	 * @return              1 if the eye tracker is connected, otherwise 0.<br>
+	 * Original signature : <code>int tobiigaze_is_connected(tobiigaze_eye_tracker*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:875</i>
+	 */
+	public static int tobiigaze_is_connected(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker) {
+		return tobiigaze_is_connected(Pointer.getPeer(eye_tracker));
+	}
+	protected native static int tobiigaze_is_connected(@Ptr long eye_tracker);
+	/**
+	 * Returns the meaning of an error code.<br>
+	 * @param error_code    An error code returned from TobiiGazeCore.<br>
+	 * @return              A string description of the specified error code.<br>
+	 * Original signature : <code>char* tobiigaze_get_error_message(tobiigaze_error_code)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze.h:882</i>
+	 */
+	public static Pointer<Byte > tobiigaze_get_error_message(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code) {
+		return Pointer.pointerToAddress(tobiigaze_get_error_message((int)error_code.value()), Byte.class);
+	}
+	@Ptr 
+	protected native static long tobiigaze_get_error_message(int error_code);
+	/**
+	 * Acquires the calibration state and clears the temporary calibration buffer.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_calibration_start_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:892</i>
+	 */
+	public static void tobiigaze_calibration_start_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_calibration_start_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_calibration_start_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Releases the calibration state. This should always be done when the calibration is completed.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_calibration_stop_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:900</i>
+	 */
+	public static void tobiigaze_calibration_stop_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_calibration_stop_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_calibration_stop_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Adds data to the temporary calibration buffer for the specified calibration point which the user is assumed to be looking at.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param point         A two dimensional point specified in the ACDS coordinate system (screen size percentage) where the users gaze is expected to be looking.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_calibration_add_point_async(tobiigaze_eye_tracker*, tobiigaze_point_2d*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:909</i>
+	 */
+	public static void tobiigaze_calibration_add_point_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_point_2d > point, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_calibration_add_point_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(point), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_calibration_add_point_async(@Ptr long eye_tracker, @Ptr long point, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Removes the data associated with the specified calibration point from the temporary calibration buffer.<br>
+	 * This is normally done when recalibrating a point with bad quality data preceding a new call to tobiigaze_calibration_add_point_async with the same point.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param point         A two dimensional point specified in the ACDS coordinate system (screen size percentage) which has previously been added to the calibration.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_calibration_remove_point_async(tobiigaze_eye_tracker*, tobiigaze_point_2d*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:919</i>
+	 */
+	public static void tobiigaze_calibration_remove_point_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_point_2d > point, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_calibration_remove_point_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(point), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_calibration_remove_point_async(@Ptr long eye_tracker, @Ptr long point, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Computes a calibration based on data in the temporary calibration buffer. If this operation succeeds the temporary calibration buffer will be copied to the active calibration buffer.<br>
+	 * If there is insufficient data to compute a calibration, TOBIIGAZE_FW_ERROR_OPERATION_FAILED will be returned via the callback.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_calibration_compute_and_set_async(tobiigaze_eye_tracker*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:928</i>
+	 */
+	public static void tobiigaze_calibration_compute_and_set_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_calibration_compute_and_set_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_calibration_compute_and_set_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Gets current calibration from the active calibration buffer.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_calibration_async(tobiigaze_eye_tracker*, tobiigaze_async_calibration_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:936</i>
+	 */
+	public static void tobiigaze_get_calibration_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_calibration_callback > callback, Pointer<? > user_data) {
+		tobiigaze_get_calibration_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_get_calibration_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Sets the specified calibration as the active calibration. The calibration data is copied both to the active and the temporary calibration buffers.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param calibration   A struct containing calibration data.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_set_calibration_async(tobiigaze_eye_tracker*, tobiigaze_calibration*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:945</i>
+	 */
+	public static void tobiigaze_set_calibration_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_calibration > calibration, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_set_calibration_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(calibration), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_set_calibration_async(@Ptr long eye_tracker, @Ptr long calibration, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Gets current calibration from the active calibration buffer.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param calibration   Calibration out parameter.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_calibration(tobiigaze_eye_tracker*, tobiigaze_calibration*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:953</i>
+	 */
+	public static void tobiigaze_get_calibration(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_calibration > calibration, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_get_calibration(Pointer.getPeer(eye_tracker), Pointer.getPeer(calibration), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_get_calibration(@Ptr long eye_tracker, @Ptr long calibration, @Ptr long error_code);
+	/**
+	 * Sets the specified calibration as the active calibration. The calibration data is copied both to the active and the temporary calibration buffers.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param calibration   A struct containing the calibration.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_set_calibration(tobiigaze_eye_tracker*, tobiigaze_calibration*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:961</i>
+	 */
+	public static void tobiigaze_set_calibration(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_calibration > calibration, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_set_calibration(Pointer.getPeer(eye_tracker), Pointer.getPeer(calibration), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_set_calibration(@Ptr long eye_tracker, @Ptr long calibration, @Ptr long error_code);
+	/**
+	 * Retrieves individual calibration point data from the specified calibration.<br>
+	 * @param calibration                  A struct containing the calibration data.<br>
+	 * @param point_data_items             An array to be filled with point data entries.<br>
+	 * @param point_datas_items_capacity   The capacity of the point data array (maximum number of entries).<br>
+	 * @param point_datas_items_size       The number of point data entries written to the array. Max items is TOBIIGAZE_MAX_CALIBRATION_POINT_DATA_ENTRIES.<br>
+	 * @param error_code                   Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_calibration_point_data_items(tobiigaze_calibration*, tobiigaze_calibration_point_data*, uint32_t, uint32_t*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_calibration.h:971</i>
+	 */
+	public static void tobiigaze_get_calibration_point_data_items(Pointer<tobiigaze_calibration > calibration, Pointer<tobiigaze_calibration_point_data > point_data_items, int point_data_items_capacity, Pointer<Integer > point_data_items_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_get_calibration_point_data_items(Pointer.getPeer(calibration), Pointer.getPeer(point_data_items), point_data_items_capacity, Pointer.getPeer(point_data_items_size), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_get_calibration_point_data_items(@Ptr long calibration, @Ptr long point_data_items, int point_data_items_capacity, @Ptr long point_data_items_size, @Ptr long error_code);
+	/**
+	 * Collects information about all usb eye trackers currently connected to the machine.<br>
+	 * @param device_infos          A pre-allocated array that will contain device information about the eye trackers.<br>
+	 * @param device_infos_cap      The capacity of the device_infos array.<br>
+	 * @param device_infos_size     The number of eye trackers found.<br>
+	 * @param error_code            Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_list_usb_eye_trackers(usb_device_info*, uint32_t, uint32_t*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_discovery.h:982</i>
+	 */
+	public static void tobiigaze_list_usb_eye_trackers(Pointer<usb_device_info > device_infos, int device_infos_cap, Pointer<Integer > device_infos_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_list_usb_eye_trackers(Pointer.getPeer(device_infos), device_infos_cap, Pointer.getPeer(device_infos_size), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_list_usb_eye_trackers(@Ptr long device_infos, int device_infos_cap, @Ptr long device_infos_size, @Ptr long error_code);
+	/**
+	 * Gets the url to a connected eye tracker. If mutliple eye trackers are connected, an arbitary eye tracker will be returned.<br>
+	 * @param url          Buffer where the url will be written to.<br>
+	 * @param url_size     Size of the buffer in bytes.<br>
+	 * @param error_code   Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_connected_eye_tracker(char*, uint32_t, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_discovery.h:990</i>
+	 */
+	public static void tobiigaze_get_connected_eye_tracker(Pointer<Byte > url, int url_size, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_get_connected_eye_tracker(Pointer.getPeer(url), url_size, Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_get_connected_eye_tracker(@Ptr long url, int url_size, @Ptr long error_code);
+	/**
+	 * Get the display area of the device asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_display_area_async(tobiigaze_eye_tracker*, tobiigaze_async_display_area_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_display_area.h:1000</i>
+	 */
+	public static void tobiigaze_get_display_area_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<TobiiSDKLibrary.tobiigaze_async_display_area_callback > callback, Pointer<? > user_data) {
+		tobiigaze_get_display_area_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_get_display_area_async(@Ptr long eye_tracker, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Sets the display area of the device asynchronously.<br>
+	 * This call will result in a TOBII_FW_ERROR_UNSUPPORTED_OPERATION, in the callback, if the connected Eye Tracker does not support the operation.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param display_area  A struct containing the display area coordinates.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_set_display_area_async(tobiigaze_eye_tracker*, tobiigaze_display_area*, tobiigaze_async_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_display_area.h:1010</i>
+	 */
+	public static void tobiigaze_set_display_area_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_display_area > display_area, Pointer<TobiiSDKLibrary.tobiigaze_async_callback > callback, Pointer<? > user_data) {
+		tobiigaze_set_display_area_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(display_area), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_set_display_area_async(@Ptr long eye_tracker, @Ptr long display_area, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Gets the display area synchronously.<br>
+	 * @param eye_tracker     An eye tracker instance.<br>
+	 * @param configuration   A struct containing the current display area coordinates (out parameter).<br>
+	 * @param error_code      Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_get_display_area(tobiigaze_eye_tracker*, tobiigaze_display_area*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_display_area.h:1018</i>
+	 */
+	public static void tobiigaze_get_display_area(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_display_area > display_area, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_get_display_area(Pointer.getPeer(eye_tracker), Pointer.getPeer(display_area), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_get_display_area(@Ptr long eye_tracker, @Ptr long display_area, @Ptr long error_code);
+	/**
+	 * Sets the display area synchronously.<br>
+	 * This call will result in a TOBII_FW_ERROR_UNSUPPORTED_OPERATION if the connected Eye Tracker does not support the operation.<br>
+	 * @param eye_tracker     An eye tracker instance.<br>
+	 * @param configuration   A struct containing the display area coordinates that should be set.<br>
+	 * @param error_code              Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_set_display_area(tobiigaze_eye_tracker*, tobiigaze_display_area*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_display_area.h:1027</i>
+	 */
+	public static void tobiigaze_set_display_area(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_display_area > display_area, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_set_display_area(Pointer.getPeer(eye_tracker), Pointer.getPeer(display_area), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_set_display_area(@Ptr long eye_tracker, @Ptr long display_area, @Ptr long error_code);
+	/**
+	 * Sends a custom command to the eye tracker<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param in_data       Data to send to the eye tracker. The data must be allocated by the caller.<br>
+	 * @param out_data      Data to receive from the eye tracker.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_send_custom_command(tobiigaze_eye_tracker*, tobiigaze_custom_command*, tobiigaze_custom_command*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1038</i>
+	 */
+	public static void tobiigaze_send_custom_command(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_custom_command > in_data, Pointer<tobiigaze_custom_command > out_data, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_send_custom_command(Pointer.getPeer(eye_tracker), Pointer.getPeer(in_data), Pointer.getPeer(out_data), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_send_custom_command(@Ptr long eye_tracker, @Ptr long in_data, @Ptr long out_data, @Ptr long error_code);
+	/**
+	 * Sends a custom command to the eye tracker asynchronously.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param in_data       Data to send to the eye tracker. The data must be allocated by the caller.<br>
+	 * @param callback      A callback function that will be called on command completion.<br>
+	 * @param user_data     Optional user supplied data that will be passed unmodified to the callback function. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_send_custom_command_async(tobiigaze_eye_tracker*, tobiigaze_custom_command*, tobiigaze_async_custom_command_callback, void*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1047</i>
+	 */
+	public static void tobiigaze_send_custom_command_async(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, Pointer<tobiigaze_custom_command > in_data, Pointer<TobiiSDKLibrary.tobiigaze_async_custom_command_callback > callback, Pointer<? > user_data) {
+		tobiigaze_send_custom_command_async(Pointer.getPeer(eye_tracker), Pointer.getPeer(in_data), Pointer.getPeer(callback), Pointer.getPeer(user_data));
+	}
+	protected native static void tobiigaze_send_custom_command_async(@Ptr long eye_tracker, @Ptr long in_data, @Ptr long callback, @Ptr long user_data);
+	/**
+	 * Sets an API option. Options are documented in tobiigaze_option.<br>
+	 * @param eye_tracker   An eye tracker instance.<br>
+	 * @param option        The id of the option.<br>
+	 * @param value         A pointer to the value of the option.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_set_option(tobiigaze_eye_tracker*, tobiigaze_option, void*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1056</i>
+	 */
+	public static void tobiigaze_set_option(Pointer<TobiiSDKLibrary.tobiigaze_eye_tracker > eye_tracker, IntValuedEnum<TobiiSDKLibrary.tobiigaze_option > option, Pointer<? > value, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_set_option(Pointer.getPeer(eye_tracker), (int)option.value(), Pointer.getPeer(value), Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_set_option(@Ptr long eye_tracker, int option, @Ptr long value, @Ptr long error_code);
+	/**
+	 * Translates raw extension bytes to an integer. A type-check will occur, and an error will be returned if the types do not match.<br>
+	 * @param extension     An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @return              The integer value of the extension field.<br>
+	 * Original signature : <code>uint32_t tobiigaze_gaze_data_extension_to_uint32(tobiigaze_gaze_data_extension*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1064</i>
+	 */
+	public static int tobiigaze_gaze_data_extension_to_uint32(Pointer<tobiigaze_gaze_data_extension > extension, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		return tobiigaze_gaze_data_extension_to_uint32(Pointer.getPeer(extension), Pointer.getPeer(error_code));
+	}
+	protected native static int tobiigaze_gaze_data_extension_to_uint32(@Ptr long extension, @Ptr long error_code);
+	/**
+	 * Translates raw extension bytes to a float. A type-check will occur, and an error will be returned if the types do not match.<br>
+	 * @param extension     An eye tracker instance.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * @return              The float value of the extension field.<br>
+	 * Original signature : <code>float tobiigaze_gaze_data_extension_to_float(tobiigaze_gaze_data_extension*, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1072</i>
+	 */
+	public static float tobiigaze_gaze_data_extension_to_float(Pointer<tobiigaze_gaze_data_extension > extension, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		return tobiigaze_gaze_data_extension_to_float(Pointer.getPeer(extension), Pointer.getPeer(error_code));
+	}
+	protected native static float tobiigaze_gaze_data_extension_to_float(@Ptr long extension, @Ptr long error_code);
+	/**
+	 * Translates raw extension bytes to a string. A type-check will occur, and an error will be returned if the types do not match.<br>
+	 * @param extension     An eye tracker instance.<br>
+	 * @param destination   A buffer that will contain the data.<br>
+	 * @param capacity      The capacity of the destination buffer.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_gaze_data_extension_to_string(tobiigaze_gaze_data_extension*, char*, uint32_t, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1081</i>
+	 */
+	public static void tobiigaze_gaze_data_extension_to_string(Pointer<tobiigaze_gaze_data_extension > extension, Pointer<Byte > destination, int capacity, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_gaze_data_extension_to_string(Pointer.getPeer(extension), Pointer.getPeer(destination), capacity, Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_gaze_data_extension_to_string(@Ptr long extension, @Ptr long destination, int capacity, @Ptr long error_code);
+	/**
+	 * Translates raw extension bytes to a blob. A type-check will occur, and an error will be returned if the types do not match.<br>
+	 * @param extension     An eye tracker instance.<br>
+	 * @param destination   A buffer that will contain the data.<br>
+	 * @param capacity      The capacity of the destination buffer.<br>
+	 * @param error_code    Will be set to TOBIIGAZE_ERROR_SUCCESS if operation was successful, otherwise to an error code. Can be NULL.<br>
+	 * Original signature : <code>void tobiigaze_gaze_data_extension_to_blob(tobiigaze_gaze_data_extension*, uint8_t*, uint32_t, tobiigaze_error_code*)</code><br>
+	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_ext.h:1090</i>
+	 */
+	public static void tobiigaze_gaze_data_extension_to_blob(Pointer<tobiigaze_gaze_data_extension > extension, Pointer<Byte > destination, int capacity, Pointer<IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > > error_code) {
+		tobiigaze_gaze_data_extension_to_blob(Pointer.getPeer(extension), Pointer.getPeer(destination), capacity, Pointer.getPeer(error_code));
+	}
+	protected native static void tobiigaze_gaze_data_extension_to_blob(@Ptr long extension, @Ptr long destination, int capacity, @Ptr long error_code);
 	public static class tobiigaze_eye_tracker extends TypedPointer {
 		public tobiigaze_eye_tracker(long address) {
 			super(address);

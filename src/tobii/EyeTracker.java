@@ -1,9 +1,13 @@
 package tobii;
 
+import org.bridj.IntValuedEnum;
 import org.bridj.Pointer;
 import org.bridj.Pointer.StringType;
 
 import tobii.lowlevel.sdk.TobiiSDKLibrary;
+import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_async_basic_callback;
+import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_async_callback;
+import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_error_code;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_eye_tracker;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_gaze_listener;
 import tobii.lowlevel.sdk.TobiiSDKLibrary.tobiigaze_key_provider_callback;
@@ -38,6 +42,10 @@ public final class EyeTracker extends AbstractTracker {
 		public void apply(int realm_id, Pointer<tobiigaze_key> ptr, Pointer<?> user_data) {
 			ptr.setString(key, StringType.C);			
 		}
+	}	
+
+	protected abstract class ErrorCallback extends tobiigaze_async_callback {
+
 	}	
 
 	
@@ -155,6 +163,18 @@ public final class EyeTracker extends AbstractTracker {
 				}
 			});
 			
+			TobiiSDKLibrary.tobiigaze_register_error_callback(tracker, (new ErrorCallback() {				
+				@Override
+				public void apply(int error_code, Pointer<?> user_data) {
+					synchronized (listener) {
+						APIException e = exception(error_code);
+						for (GazeListener l : listener) {
+							l.apiException(e);
+						}
+					}			
+				}
+			}.toPointer()), null);
+			
 			// Event loop must run in background			
 			this.thread.setDaemon(true);
 			this.thread.start();
@@ -163,7 +183,7 @@ public final class EyeTracker extends AbstractTracker {
 			if (this.key != null) {
 				this.keycallback = new KeyProviderCallback();
 				TobiiSDKLibrary.tobiigaze_register_key_provider(tracker, (Pointer<TobiiSDKLibrary.tobiigaze_key_provider_callback>) this.keycallback.toPointer(), error, url);
-				exception(error.getInt()); 				
+				if (error.getInt() > 0) throw exception(error.getInt()); 				
 			}
 									
 			// Actually connect to the device			

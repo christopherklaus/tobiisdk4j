@@ -241,7 +241,7 @@ public class TobiiSDKLibrary {
 	 * <i>native declaration : tobii_gaze_sdk/include/tobiigaze_callback_types.h:605</i>
 	 */
 	public static abstract class tobiigaze_async_callback extends Callback<tobiigaze_async_callback > {
-		abstract public void apply(IntValuedEnum<TobiiSDKLibrary.tobiigaze_error_code > error_code, Pointer<? > user_data);
+		abstract public void apply(int error_code, Pointer<? > user_data);
 	};
 	/**
 	 * This type is used for callback functions that are registered with several asynchronous commands that do not have any return data or an error code.<br>

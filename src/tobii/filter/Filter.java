@@ -69,7 +69,7 @@ public abstract class Filter {
 				double x = Vn.row(past, 0).median();
 				double y = Vn.row(past, 1).median();
 				
-				if (in.length() == 3) {
+				if (in.dim() == 3) {
 					double z = Vn.row(past, 2).median();
 					return new Vn(x, y, z);
 				}
